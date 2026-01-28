@@ -4,6 +4,7 @@
   "description": "Documentation and download site for bgit - Multi-Git Identity Manager",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/fetch-changelog.js",
     "build": "next build",
     "start": "next start",
     "preview": "npm run build && cd out && python3 -m http.server 8000",

@@ -2,33 +2,38 @@
   "releases": [
     {
       "version": "0.2.0",
-      "date": "",
+      "date": "2025-01-28",
       "phase": 2,
-      "summary": "Repository-aware identity management with workspaces and diagnostics",
+      "summary": "Phase 2 release with workspace support and diagnostics.",
       "features": [
         {
-          "title": "Workspace command",
-          "description": "Create organized folders for each identity with automatic binding. All repos cloned within a workspace folder automatically use that identity.",
-          "command": "bgit workspace",
-          "docs_link": "/docs#workspaces"
+          "title": "Workspace management",
+          "description": "Create organized workspace folders with automatic identity binding",
+          "command": "bgit workspace"
         },
         {
-          "title": "Repo-bound identity",
-          "description": "Bind specific repositories to an identity. The binding persists regardless of global active user.",
-          "command": "bgit bind",
-          "docs_link": "/docs#workspaces"
+          "title": "Repository binding",
+          "description": "Bind individual repositories to specific identities",
+          "command": "bgit bind"
         },
         {
-          "title": "Status command",
-          "description": "View current identity, repository binding status, configured workspaces, and detect mismatches at a glance.",
-          "command": "bgit status",
-          "docs_link": "/docs#identity-resolution"
+          "title": "Identity status",
+          "description": "Show current identity status and bindings",
+          "command": "bgit status"
         },
         {
-          "title": "Doctor diagnostics",
-          "description": "Troubleshoot SSH keys, permissions, git config, and connectivity issues with actionable fix suggestions.",
-          "command": "bgit doctor",
-          "docs_link": "/docs#troubleshooting"
+          "title": "Diagnostics",
+          "description": "Diagnose and auto-fix configuration issues",
+          "command": "bgit doctor"
+        },
+        {
+          "title": "Active identity",
+          "description": "Show current active identity",
+          "command": "bgit active"
+        },
+        {
+          "title": "Identity resolution",
+          "description": "Automatic identity resolution based on workspace > binding > global priority"
         }
       ],
       "fixes": [],
@@ -36,57 +41,48 @@
     },
     {
       "version": "0.1.0",
-      "date": "2025-01-17",
+      "date": "2025-01-28",
       "phase": 1,
-      "summary": "Initial release with core identity management",
+      "summary": "Initial release with core identity management features.",
       "features": [
         {
-          "title": "Add identities",
-          "description": "Add new Git identities with SSH key generation or import.",
-          "command": "bgit add",
-          "docs_link": "/docs#getting-started"
+          "title": "Multi-user identity management",
+          "description": "Add, list, use, and delete Git identities",
+          "command": "bgit add/use/list/delete"
         },
         {
-          "title": "Switch identities",
-          "description": "Switch between configured identities with a single command.",
-          "command": "bgit use",
-          "docs_link": "/docs#usage"
+          "title": "SSH key management",
+          "description": "Generate or import SSH keys for each identity",
+          "command": "bgit add"
         },
         {
-          "title": "List identities",
-          "description": "View all configured identities and see which one is active.",
-          "command": "bgit list",
-          "docs_link": "/docs#usage"
+          "title": "Git config handling",
+          "description": "Automatic user.name and user.email configuration",
+          "command": "bgit use"
         },
         {
           "title": "Clone with identity",
-          "description": "Clone repositories using the correct SSH configuration for the active identity.",
-          "command": "bgit clone",
-          "docs_link": "/docs#usage"
+          "description": "Clone repositories with the correct SSH configuration",
+          "command": "bgit clone"
         },
         {
           "title": "Remote management",
-          "description": "Fix or restore repository remote URLs for identity-aware SSH access.",
-          "command": "bgit remote fix|restore",
-          "docs_link": "/docs#usage"
+          "description": "Fix and restore remote URLs for bgit compatibility",
+          "command": "bgit remote fix/restore"
         },
         {
-          "title": "Sync validation",
-          "description": "Validate that Git and SSH configs match the active user.",
-          "command": "bgit sync",
-          "docs_link": "/docs#usage"
+          "title": "Configuration sync",
+          "description": "Validate and sync bgit configuration",
+          "command": "bgit sync"
         },
         {
           "title": "Safe uninstall",
-          "description": "Cleanly remove bgit while restoring all repositories to standard GitHub URLs.",
-          "command": "bgit uninstall",
-          "docs_link": "/docs#faq"
+          "description": "Safely uninstall bgit and restore all repositories",
+          "command": "bgit uninstall"
         },
         {
           "title": "Cross-platform support",
-          "description": "Works on Linux, macOS, and Windows with platform-specific handling.",
-          "command": null,
-          "docs_link": "/docs#installation"
+          "description": "Works on Linux, macOS, and Windows"
         }
       ],
       "fixes": [],
