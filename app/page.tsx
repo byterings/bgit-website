@@ -7,10 +7,10 @@ export default function Home() {
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-6xl md:text-7xl font-bold mb-6">bgit</h1>
-          <p className="text-3xl text-muted mb-8">Multi-Git Identity Manager</p>
+          <p className="text-3xl text-muted mb-8">CLI Tool for Multi-User Git Management</p>
           <p className="text-xl text-foreground/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Switch between multiple Git accounts safely. One command, zero
-            mistakes.
+            A powerful command-line tool to manage multiple Git identities.
+            Switch between work, personal, and client accounts with one command.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -138,7 +138,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold mb-4 text-center">Features</h2>
           <p className="text-center text-muted mb-12 text-lg">
-            Everything you need to manage multiple Git accounts
+            Everything you need in a Git identity management CLI tool
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -285,8 +285,8 @@ export default function Home() {
             Ready to simplify your Git workflow?
           </h2>
           <p className="text-xl text-muted mb-12 max-w-2xl mx-auto">
-            Join developers who manage multiple Git accounts effortlessly with
-            bgit
+            Join developers who use this CLI tool to manage multiple Git
+            accounts effortlessly
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

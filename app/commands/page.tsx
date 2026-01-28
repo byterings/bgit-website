@@ -244,7 +244,7 @@ export default function CommandsPage() {
                 Commands Reference
               </h1>
               <p className="text-xl text-muted">
-                Complete reference for all bgit commands
+                Complete CLI commands reference for the bgit tool
               </p>
             </div>
 

@@ -83,8 +83,8 @@ export default function DocsPage() {
                 Documentation
               </h1>
               <p className="text-xl text-muted">
-                Complete guide to using bgit for managing multiple Git
-                identities
+                Complete guide to using the bgit CLI tool for managing multiple
+                Git identities
               </p>
             </div>
 

@@ -1,0 +1,6 @@
+# robots.txt for bgit - CLI Tool for Multi-User Git Management
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://bgit.byterings.com/sitemap.xml
