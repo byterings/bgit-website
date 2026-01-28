@@ -169,7 +169,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                   <p className="text-foreground font-bold mb-3 text-sm">
                     Run this command in PowerShell:
                   </p>
-                  <CodeBlock>{`irm https://raw.githubusercontent.com/byterings/bgit/master/install.ps1 | iex`}</CodeBlock>
+                  <CodeBlock>{`irm https://raw.githubusercontent.com/byterings/bgit/main/install.ps1 | iex`}</CodeBlock>
                 </div>
 
                 {/* Verify Installation */}
