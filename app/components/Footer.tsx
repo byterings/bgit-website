@@ -105,7 +105,7 @@ export default function Footer() {
             .
           </p>
           <p className="text-xs">
-            Current version: <span className="text-accent">v0.2.0</span>
+            Current version: <span className="text-accent">v0.2.1</span>
           </p>
         </div>
       </div>

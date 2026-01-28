@@ -9,14 +9,19 @@ interface Feature {
   docs_link?: string;
 }
 
+interface Fix {
+  title: string;
+  description: string;
+}
+
 interface Release {
   version: string;
   date: string;
   phase: number;
   summary: string;
   features: Feature[];
-  fixes?: string[];
-  breaking_changes?: string[];
+  fixes?: Fix[];
+  breaking_changes?: Fix[];
 }
 
 interface Changelog {

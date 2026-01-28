@@ -10,14 +10,19 @@ interface Feature {
   docs_link?: string;
 }
 
+interface Fix {
+  title: string;
+  description: string;
+}
+
 interface Release {
   version: string;
   date: string;
   phase: number;
   summary: string;
   features: Feature[];
-  fixes?: string[];
-  breaking_changes?: string[];
+  fixes?: Fix[];
+  breaking_changes?: Fix[];
 }
 
 interface Changelog {
@@ -329,11 +334,14 @@ export default function ChangelogContent({ changelog }: ChangelogContentProps) {
                                     <span className="text-xs text-muted bg-[#0d0d0d] px-2 py-0.5 rounded-full">{release.fixes.length}</span>
                                   </div>
                                   <div className="p-5">
-                                    <ul className="space-y-2">
+                                    <ul className="space-y-3">
                                       {release.fixes.map((fix, fixIndex) => (
-                                        <li key={fixIndex} className="flex gap-2 text-sm text-muted">
-                                          <span className="text-amber-400">-</span>
-                                          <span>{fix}</span>
+                                        <li key={fixIndex} className="flex gap-2 text-sm">
+                                          <span className="text-amber-400 mt-0.5">-</span>
+                                          <div>
+                                            <span className="font-medium text-foreground">{fix.title}</span>
+                                            <p className="text-muted">{fix.description}</p>
+                                          </div>
                                         </li>
                                       ))}
                                     </ul>
@@ -354,11 +362,14 @@ export default function ChangelogContent({ changelog }: ChangelogContentProps) {
                                     <span className="text-xs text-red-400/70 bg-red-950/30 px-2 py-0.5 rounded-full">{release.breaking_changes.length}</span>
                                   </div>
                                   <div className="p-5">
-                                    <ul className="space-y-2">
+                                    <ul className="space-y-3">
                                       {release.breaking_changes.map((change, changeIndex) => (
-                                        <li key={changeIndex} className="flex gap-2 text-sm text-muted">
-                                          <span className="text-red-400">!</span>
-                                          <span>{change}</span>
+                                        <li key={changeIndex} className="flex gap-2 text-sm">
+                                          <span className="text-red-400 mt-0.5">!</span>
+                                          <div>
+                                            <span className="font-medium text-foreground">{change.title}</span>
+                                            <p className="text-muted">{change.description}</p>
+                                          </div>
                                         </li>
                                       ))}
                                     </ul>
