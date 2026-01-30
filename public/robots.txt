@@ -4,3 +4,6 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://bgit.byterings.com/sitemap.xml
+
+# LLM-friendly content
+# See https://bgit.byterings.com/llms.txt

@@ -7,17 +7,25 @@ interface AccordionItemProps {
   answer: string;
   isOpen: boolean;
   onToggle: () => void;
+  index: number;
 }
 
-function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProps) {
+function AccordionItem({ question, answer, isOpen, onToggle, index }: AccordionItemProps) {
+  const btnId = `accordion-btn-${index}`;
+  const panelId = `accordion-panel-${index}`;
+
   return (
     <div className="border border-gray-800 rounded-lg overflow-hidden">
       <button
+        id={btnId}
         onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
         className="w-full px-5 py-4 flex items-center justify-between text-left bg-[#0d0d0d] hover:bg-[#111] transition-colors"
       >
         <span className="font-semibold pr-4">{question}</span>
         <svg
+          aria-hidden="true"
           className={`w-5 h-5 text-muted flex-shrink-0 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
           }`}
@@ -30,6 +38,9 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
         </svg>
       </button>
       <div
+        id={panelId}
+        role="region"
+        aria-labelledby={btnId}
         className={`overflow-hidden transition-all duration-200 ${
           isOpen ? 'max-h-96' : 'max-h-0'
         }`}
@@ -58,6 +69,7 @@ export default function Accordion({ items }: AccordionProps) {
       {items.map((item, index) => (
         <AccordionItem
           key={item.question}
+          index={index}
           question={item.question}
           answer={item.answer}
           isOpen={openIndex === index}

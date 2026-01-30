@@ -1,0 +1,59 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+
+  <!-- Subtle gradient background -->
+  <rect width="1200" height="630" fill="url(#bg-gradient)" opacity="0.5"/>
+  <defs>
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="1200" y2="630">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1200" height="4" fill="#52a8ff"/>
+
+  <!-- Terminal-style decorative element -->
+  <rect x="80" y="160" width="440" height="300" rx="12" fill="#111111" stroke="#333333" stroke-width="1"/>
+  <circle cx="108" cy="184" r="6" fill="#ff5f56"/>
+  <circle cx="130" cy="184" r="6" fill="#ffbd2e"/>
+  <circle cx="152" cy="184" r="6" fill="#27c93f"/>
+
+  <!-- Terminal text -->
+  <text x="108" y="235" font-family="monospace" font-size="18" fill="#6b7280">$</text>
+  <text x="130" y="235" font-family="monospace" font-size="18" fill="#e5e5e5"> bgit use work</text>
+  <text x="108" y="268" font-family="monospace" font-size="16" fill="#27c93f">Switched to identity: work</text>
+
+  <text x="108" y="310" font-family="monospace" font-size="18" fill="#6b7280">$</text>
+  <text x="130" y="310" font-family="monospace" font-size="18" fill="#e5e5e5"> bgit list</text>
+  <text x="108" y="343" font-family="monospace" font-size="16" fill="#52a8ff">  work      (john@company.com)</text>
+  <text x="108" y="370" font-family="monospace" font-size="16" fill="#6b7280">  personal  (john@gmail.com)</text>
+  <text x="108" y="397" font-family="monospace" font-size="16" fill="#6b7280">  client    (john@client.co)</text>
+
+  <!-- Main content area -->
+  <text x="600" y="200" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="#ffffff" text-anchor="start">bgit</text>
+
+  <!-- Tagline -->
+  <text x="600" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#52a8ff" text-anchor="start">CLI Tool for Multi-User</text>
+  <text x="600" y="295" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#52a8ff" text-anchor="start">Git Identity Management</text>
+
+  <!-- Description -->
+  <text x="600" y="355" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#9ca3af" text-anchor="start">Switch between work, personal, and client</text>
+  <text x="600" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#9ca3af" text-anchor="start">accounts with one command.</text>
+
+  <!-- Features pills -->
+  <rect x="600" y="420" width="140" height="36" rx="18" fill="#52a8ff" fill-opacity="0.15" stroke="#52a8ff" stroke-opacity="0.3"/>
+  <text x="670" y="443" font-family="system-ui, sans-serif" font-size="14" fill="#52a8ff" text-anchor="middle">SSH Keys</text>
+
+  <rect x="755" y="420" width="160" height="36" rx="18" fill="#52a8ff" fill-opacity="0.15" stroke="#52a8ff" stroke-opacity="0.3"/>
+  <text x="835" y="443" font-family="system-ui, sans-serif" font-size="14" fill="#52a8ff" text-anchor="middle">Workspaces</text>
+
+  <rect x="930" y="420" width="180" height="36" rx="18" fill="#52a8ff" fill-opacity="0.15" stroke="#52a8ff" stroke-opacity="0.3"/>
+  <text x="1020" y="443" font-family="system-ui, sans-serif" font-size="14" fill="#52a8ff" text-anchor="middle">Cross-Platform</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="560" width="1200" height="70" fill="#111111"/>
+  <text x="80" y="602" font-family="system-ui, sans-serif" font-size="18" fill="#6b7280">bgit.byterings.com</text>
+  <text x="1120" y="602" font-family="system-ui, sans-serif" font-size="16" fill="#6b7280" text-anchor="end">Free &amp; Open Source (MIT)</text>
+</svg>

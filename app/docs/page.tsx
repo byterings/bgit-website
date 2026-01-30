@@ -41,6 +41,73 @@ export default function DocsPage() {
 
   return (
     <div className="pt-24 pb-20 px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Does bgit wrap Git commands?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. bgit only manages your Git and SSH configuration. You continue using regular git commands after switching identities.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What's the difference between workspaces and bindings?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Workspaces apply to all repos in a folder (created with 'bgit workspace'). Bindings apply to individual repos ('bgit bind'). Workspace takes priority over binding.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How do I know which identity will be used?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Run 'bgit status' to see the effective identity and why (workspace, binding, or global).",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I use bgit with GitLab or Bitbucket?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes! While bgit is optimized for GitHub, the Git configuration changes work with any Git hosting service.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is my existing .gitconfig safe?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. bgit only modifies user.name and user.email. All other settings are preserved.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How do I fix SSH permission errors?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Run 'bgit doctor --fix' to automatically set correct permissions (700 for ~/.ssh, 600 for key files).",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How do I uninstall bgit?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Run 'bgit uninstall' to safely restore all repositories to standard GitHub format and remove bgit config. Then remove the binary: sudo rm /usr/local/bin/bgit",
+                },
+              },
+            ],
+          }),
+        }}
+      />
       <div className="max-w-7xl mx-auto">
         <div className="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
           {/* Sidebar */}
@@ -76,7 +143,7 @@ export default function DocsPage() {
           </aside>
 
           {/* Main Content */}
-          <main className="min-w-0">
+          <div className="min-w-0">
             {/* Header */}
             <div className="mb-12">
               <h1 className="text-4xl lg:text-5xl font-bold mb-4">
@@ -114,6 +181,7 @@ export default function DocsPage() {
                 <div>
                   <h3 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
                     <svg
+                      aria-hidden="true"
                       className="w-6 h-6"
                       viewBox="0 0 24 24"
                       fill="currentColor">
@@ -134,6 +202,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                 <div>
                   <h3 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
                     <svg
+                      aria-hidden="true"
                       className="w-6 h-6"
                       viewBox="0 0 24 24"
                       fill="currentColor">
@@ -159,6 +228,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                 <div>
                   <h3 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
                     <svg
+                      aria-hidden="true"
                       className="w-6 h-6"
                       viewBox="0 0 24 24"
                       fill="currentColor">
@@ -633,7 +703,7 @@ bgit bind --user work
                 </a>
               </div>
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </div>

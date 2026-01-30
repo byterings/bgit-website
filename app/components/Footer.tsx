@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { siteConfig } from '../lib/config';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -105,7 +106,7 @@ export default function Footer() {
             .
           </p>
           <p className="text-xs">
-            Current version: <span className="text-accent">v0.2.1</span>
+            Current version: <span className="text-accent">v{siteConfig.version}</span>
           </p>
         </div>
       </div>

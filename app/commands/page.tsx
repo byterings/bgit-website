@@ -237,7 +237,7 @@ export default function CommandsPage() {
           </aside>
 
           {/* Main Content */}
-          <main className="min-w-0">
+          <div className="min-w-0">
             {/* Header */}
             <div className="mb-12">
               <h1 className="text-4xl lg:text-5xl font-bold mb-4">
@@ -433,7 +433,7 @@ bgit remote fix
                 </a>
               </div>
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </div>

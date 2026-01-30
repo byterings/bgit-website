@@ -1,8 +1,33 @@
 import Link from "next/link";
+import JsonLd from "./components/JsonLd";
 
 export default function Home() {
   return (
     <div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "bgit",
+          description:
+            "A powerful CLI tool for managing multiple Git identities. Switch between work, personal, and client accounts with one command.",
+          applicationCategory: "DeveloperApplication",
+          operatingSystem: "Linux, macOS, Windows",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+          },
+          url: "https://bgit.byterings.com",
+          downloadUrl: "https://github.com/byterings/bgit/releases",
+          softwareVersion: "0.2.1",
+          author: {
+            "@type": "Organization",
+            name: "ByteRings",
+            url: "https://byterings.com",
+          },
+        }}
+      />
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-7xl mx-auto text-center">
@@ -40,6 +65,7 @@ export default function Home() {
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-full bg-red-500/15 border border-red-500/30 flex items-center justify-center">
                   <svg
+                    aria-hidden="true"
                     className="w-5 h-5 text-red-400"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -86,6 +112,7 @@ export default function Home() {
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center">
                   <svg
+                    aria-hidden="true"
                     className="w-5 h-5 text-green-400"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -146,6 +173,7 @@ export default function Home() {
             <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
               <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-5 h-5 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -169,6 +197,7 @@ export default function Home() {
             <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
               <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-5 h-5 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -191,6 +220,7 @@ export default function Home() {
             <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
               <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-5 h-5 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -213,6 +243,7 @@ export default function Home() {
             <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
               <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-5 h-5 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -235,6 +266,7 @@ export default function Home() {
             <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
               <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-5 h-5 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -257,6 +289,7 @@ export default function Home() {
             <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
               <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
                 <svg
+                  aria-hidden="true"
                   className="w-5 h-5 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
