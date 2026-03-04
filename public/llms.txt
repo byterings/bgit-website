@@ -1,49 +1,47 @@
 # bgit - CLI Tool for Multi-User Git Identity Management
 
-> bgit is a free, open-source command-line tool that manages multiple Git identities. It lets developers switch between work, personal, and client GitHub accounts with a single command, handling SSH keys and git config automatically.
+> bgit is a free, open-source command-line tool that manages multiple Git identities. It lets developers switch between work, personal, and client GitHub accounts while handling SSH and git config safely.
 
 ## Key Pages
 
-- [Homepage](https://bgit.byterings.com/): Overview, features, and getting started
-- [Documentation](https://bgit.byterings.com/docs/): Installation, setup, workspaces, identity resolution, configuration, troubleshooting, FAQ
-- [Commands Reference](https://bgit.byterings.com/commands/): Full CLI commands documentation with usage examples and common workflows
-- [Changelog](https://bgit.byterings.com/changelog/): Release history and version updates
-- [Support](https://bgit.byterings.com/support/): Ways to contribute and support the project
+- Homepage: https://bgit.byterings.com/
+- Documentation: https://bgit.byterings.com/docs/
+- Commands: https://bgit.byterings.com/commands/
+- Changelog: https://bgit.byterings.com/changelog/
+- Support: https://bgit.byterings.com/support/
 
-## Core Commands
+## Recommended Core Flow
 
-- bgit init: Initialize bgit on your system
-- bgit add: Add a new Git identity (interactive wizard)
-- bgit use <alias>: Switch to a different identity
-- bgit list: List all configured identities
-- bgit active: Show the currently active identity
-- bgit clone <url>: Clone a repository with correct SSH config
-- bgit workspace: Create workspace folders with automatic identity binding
-- bgit bind: Bind current repository to a specific identity
-- bgit status: Show current identity status and bindings
-- bgit doctor: Diagnose and fix configuration issues
-- bgit sync: Validate and fix Git/SSH configuration
-- bgit remote fix: Fix repository remote URL for active identity
-- bgit delete <alias>: Remove an identity
-- bgit update <alias>: Update an identity's SSH key
-- bgit uninstall: Safely uninstall bgit
+- `bgit setup`: One-time setup (config + managed safety hooks)
+- `bgit add`: Add a Git identity
+- `bgit use <alias>`: Switch active identity
+- `bgit clone <url> [directory] [--no-bind]`: Clone using effective identity
+- `bgit check`: Run safety checks manually
+- `bgit prompt --plain`: Output effective identity for shell prompts
 
-## Key Features
+## Additional Commands
 
-- One-command identity switching between Git accounts
-- Workspaces for automatic identity selection by folder
-- Automatic SSH key generation and management
-- Built-in diagnostics with bgit doctor
-- Repository binding for persistent identity assignment
-- Cross-platform support (Linux, macOS, Windows)
-- Safe uninstall that restores standard Git remote URLs
+- `bgit status`: Show active/effective identity and bindings
+- `bgit workspace`: Manage workspace identity mappings
+- `bgit bind`: Bind current repository to a specific identity
+- `bgit doctor`: Diagnose configuration issues
+- `bgit sync [--fix]`: Validate/fix config alignment
+- `bgit remote fix|restore`: Advanced remote URL management
+- `bgit update <alias>`: Update SSH key path
+- `bgit delete <alias>`: Remove an identity
+- `bgit uninstall`: Safe uninstall and cleanup
+
+## Deprecation Notes
+
+- `bgit init` is deprecated; use `bgit setup`
+- `bgit setup-ssh` is deprecated; use `bgit setup`
 
 ## Technical Details
 
 - Written in Go
 - MIT License
 - Cross-platform: Linux, macOS, Windows
-- Current version: 0.2.1
+- Stable release line: 0.2.x
+- Next phase in main branch: 0.3.0 (unreleased)
 - GitHub: https://github.com/byterings/bgit
 - Author: ByteRings (https://byterings.com)
-- Contact: bgit@byterings.com

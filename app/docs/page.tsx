@@ -263,9 +263,9 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                 {[
                   {
                     step: 1,
-                    title: "Initialize bgit",
-                    cmd: "bgit init",
-                    desc: "This sets up bgit on your system and creates the necessary configuration directory at ~/.bgit/",
+                    title: "Run one-time setup",
+                    cmd: "bgit setup",
+                    desc: "This sets up bgit on your system, installs managed pre-push safety checks, and prepares default configuration.",
                   },
                   {
                     step: 2,
@@ -284,6 +284,12 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                     title: "Switch between identities",
                     cmd: "bgit use work",
                     desc: "All subsequent Git operations will use the selected identity. Your global .gitconfig and SSH configuration are updated automatically.",
+                  },
+                  {
+                    step: 5,
+                    title: "Verify safety for current repo",
+                    cmd: "bgit check",
+                    desc: "Runs the same safety checks used by pre-push hook to validate active identity and remote alignment.",
                   },
                 ].map(({ step, title, cmd, desc }) => (
                   <div key={step} className="flex gap-4">
@@ -326,12 +332,17 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                   {
                     title: "Cloning Repositories",
                     cmd: "bgit clone https://github.com/org/repo.git",
-                    desc: "Clones a repository using the active identity's SSH config. Accepts any GitHub URL format.",
+                    desc: "Clones a repository using the effective identity's SSH config. By default, cloned repos are auto-bound to that identity.",
                   },
                   {
-                    title: "Fix Repository Remote",
-                    cmd: "bgit remote fix",
-                    desc: "Converts current repo's remote URL to use active identity's SSH config. Run inside a git repo.",
+                    title: "Run Push Safety Check",
+                    cmd: "bgit check",
+                    desc: "Validates identity and remote alignment before push. This runs automatically via pre-push hook after setup.",
+                  },
+                  {
+                    title: "Prompt Integration",
+                    cmd: "bgit prompt --plain",
+                    desc: "Returns the effective identity alias for shell prompt integration.",
                   },
                   {
                     title: "Validating Configuration",
@@ -370,7 +381,8 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                 <CodeBlock>{`bgit clone https://github.com/org/repo.git`}</CodeBlock>
                 <p className="text-yellow-200/80 text-sm mt-3">
                   This works with any GitHub URL format. bgit converts it to use
-                  the active identity&apos;s SSH key automatically.
+                  the effective identity&apos;s SSH key automatically and binds
+                  the cloned repo by default.
                 </p>
               </div>
 
@@ -380,6 +392,14 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                   <code>bgit use</code>, you can continue using regular{" "}
                   <code>git</code> commands as normal. bgit only manages your
                   configuration—it doesn&apos;t wrap or replace git.
+                </p>
+              </div>
+
+              <div className="mt-4 bg-amber-950/20 border border-amber-800/30 rounded-lg p-4 lg:p-5">
+                <p className="text-amber-200 text-sm">
+                  <strong>Deprecated commands:</strong> <code>bgit init</code> and{" "}
+                  <code>bgit setup-ssh</code> are kept for compatibility. Use{" "}
+                  <code>bgit setup</code> for the normal flow.
                 </p>
               </div>
             </section>

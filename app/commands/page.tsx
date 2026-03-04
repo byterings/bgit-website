@@ -6,12 +6,21 @@ import CodeBlock from "../components/CodeBlock";
 
 const commands = [
   {
+    id: "setup",
+    name: "bgit setup",
+    description: "Run one-time setup",
+    usage: "bgit setup",
+    details:
+      "Initializes bgit configuration, installs managed pre-push safety checks, updates SSH managed section, and configures first-run defaults.",
+    example: null,
+  },
+  {
     id: "init",
     name: "bgit init",
-    description: "Initialize bgit on your system",
+    description: "Initialize bgit on your system (Deprecated)",
     usage: "bgit init",
     details:
-      "Sets up bgit configuration directory at ~/.bgit/ and prepares the system for managing multiple Git identities. Optional - bgit auto-initializes on first use.",
+      "Deprecated. Use bgit setup instead. This command is kept for backward compatibility and routes users to the setup flow.",
     example: null,
   },
   {
@@ -55,18 +64,27 @@ const commands = [
     id: "clone",
     name: "bgit clone",
     description: "Clone a repository with correct SSH config",
-    usage: "bgit clone <url> [directory]",
+    usage: "bgit clone <url> [directory]\nbgit clone <url> --no-bind",
     details:
-      "Clones a GitHub repository using the active user's SSH configuration. Accepts any GitHub URL format (HTTPS or SSH) and automatically converts it to use the correct SSH key for the active identity.",
+      "Clones a GitHub repository using the effective identity's SSH configuration. Accepts HTTPS or SSH URLs and converts them automatically. By default, cloned repositories are auto-bound to the effective identity. Use --no-bind to skip.",
     example: "bgit clone https://github.com/user/repo.git",
+  },
+  {
+    id: "check",
+    name: "bgit check",
+    description: "Run pre-push safety checks manually",
+    usage: "bgit check",
+    details:
+      "Validates repo owner identity, active user, git config, and remote URL alignment. This is also used by the managed pre-push hook installed during setup.",
+    example: null,
   },
   {
     id: "remote-fix",
     name: "bgit remote fix",
-    description: "Fix repository remote URL for active identity",
+    description: "Fix repository remote URL for active identity (Legacy/Advanced)",
     usage: "bgit remote fix",
     details:
-      "Converts the current repository's origin remote URL to use the active user's SSH config. Run this inside a git repository after switching identities to fix authentication issues.",
+      "Legacy/advanced command. Converts the current repository's origin remote URL to use the active user's SSH config. In normal flow, bgit check and pre-push checks guide/fix this automatically.",
     example: null,
   },
   {
@@ -144,10 +162,19 @@ const commands = [
   {
     id: "setup-ssh",
     name: "bgit setup-ssh",
-    description: "Setup SSH agent and load keys",
+    description: "Setup SSH agent and load keys (Deprecated)",
     usage: "bgit setup-ssh",
     details:
-      "Sets up SSH agent and loads SSH keys for all configured identities. On Windows, starts the SSH agent service and sets it to automatic startup. On Linux/macOS, provides instructions if SSH agent isn't running.",
+      "Deprecated. Use bgit setup instead. This command is kept for backward compatibility and manual SSH-agent workflows.",
+    example: null,
+  },
+  {
+    id: "prompt",
+    name: "bgit prompt",
+    description: "Print effective identity for shell prompt integration",
+    usage: "bgit prompt\nbgit prompt --plain",
+    details:
+      "Outputs the effective identity for the current path. Use --plain for alias-only output, intended for shell prompt integrations.",
     example: null,
   },
   {
@@ -178,7 +205,7 @@ const commands = [
 ];
 
 export default function CommandsPage() {
-  const [activeCommand, setActiveCommand] = useState("init");
+  const [activeCommand, setActiveCommand] = useState("setup");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -320,14 +347,17 @@ export default function CommandsPage() {
               <div className="grid md:grid-cols-2 gap-4 lg:gap-6">
                 <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-4 lg:p-5">
                   <h3 className="font-semibold mb-3 lg:mb-4">First Time Setup</h3>
-                  <CodeBlock>{`# Add your work account
+                  <CodeBlock>{`# One-time setup
+bgit setup
+
+# Add your work account
 bgit add
 
 # Add your personal account
 bgit add
 
-# List all identities
-bgit list`}</CodeBlock>
+# Switch identity
+bgit use work`}</CodeBlock>
                 </div>
 
                 <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-4 lg:p-5">
@@ -359,10 +389,11 @@ bgit status`}</CodeBlock>
 cd my-project
 bgit bind --user work
 
-# Fix remote URL
-bgit remote fix
+# Run safety check
+bgit check
 
-# Now git push/pull works!`}</CodeBlock>
+# Push as usual
+git push`}</CodeBlock>
                 </div>
               </div>
             </section>
@@ -377,7 +408,7 @@ bgit remote fix
               </p>
               <CodeBlock>{`bgit clone https://github.com/org/repo.git`}</CodeBlock>
               <p className="text-yellow-200/80 text-sm mt-3">
-                Alternatively, you can use identity-specific hostname format manually: <code>git@github.com-work:org/repo.git</code>
+                bgit converts to identity-specific hostname format automatically (for example: <code>git@github.com-work-gh:org/repo.git</code>).
               </p>
             </div>
 
