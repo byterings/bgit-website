@@ -22,7 +22,7 @@ export default function Footer() {
                 Documentation
               </Link>
               <Link href="/commands" className="block text-muted hover:text-accent transition">
-                Commands
+                CLI Commands
               </Link>
               <a
                 href="https://github.com/byterings/bgit/releases"
@@ -78,7 +78,7 @@ export default function Footer() {
                 Email Us
               </a>
               <Link href="/support" className="block text-muted hover:text-accent transition">
-                Support Project
+                Help / Support
               </Link>
               <a
                 href="https://byterings.com"
