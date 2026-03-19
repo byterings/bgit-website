@@ -4,19 +4,28 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import ThemeToggle from './ThemeToggle';
+import SearchDialog from './SearchDialog';
 
 export default function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const isActive = (path: string) => pathname === path;
+  const normalizePath = (path: string) => {
+    if (path === '/') {
+      return '/';
+    }
+
+    return path.replace(/\/+$/, '');
+  };
+
+  const isActive = (path: string) => normalizePath(pathname) === normalizePath(path);
 
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/docs', label: 'Docs' },
-    { href: '/commands', label: 'Commands' },
+    { href: '/commands', label: 'CLI Commands' },
     { href: '/changelog', label: 'Changelog' },
-    { href: '/support', label: 'Support' },
+    { href: '/support', label: 'Help / Support' },
   ];
 
   return (
@@ -27,7 +36,7 @@ export default function Navigation() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-4 xl:gap-6">
           <div className="flex gap-1 text-sm font-medium">
             {navLinks.map(({ href, label }) => (
               <Link
@@ -51,13 +60,20 @@ export default function Navigation() {
               GitHub
             </a>
           </div>
-          <div className="border-l border-gray-800 pl-6">
+          <div className="xl:hidden">
+            <SearchDialog variant="mobile" />
+          </div>
+          <div className="hidden xl:block">
+            <SearchDialog variant="desktop" />
+          </div>
+          <div className="border-l border-gray-800 pl-4 xl:pl-6">
             <ThemeToggle />
           </div>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex md:hidden items-center gap-4">
+          <SearchDialog variant="mobile" />
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

@@ -1,5 +1,8 @@
 import Link from "next/link";
+import HeroTerminalScene from "./components/HeroTerminalScene";
 import JsonLd from "./components/JsonLd";
+import QuickInstallSection from "./components/QuickInstallSection";
+import { siteConfig } from "./lib/config";
 
 export default function Home() {
   return (
@@ -20,7 +23,7 @@ export default function Home() {
           },
           url: "https://bgit.byterings.com",
           downloadUrl: "https://github.com/byterings/bgit/releases",
-          softwareVersion: "0.2.1",
+          softwareVersion: siteConfig.version,
           author: {
             "@type": "Organization",
             name: "ByteRings",
@@ -30,32 +33,53 @@ export default function Home() {
       />
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6">bgit</h1>
-          <p className="text-3xl text-muted mb-8">CLI Tool for Multi-User Git Management</p>
-          <p className="text-xl text-foreground/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-            A powerful command-line tool to manage multiple Git identities.
-            Switch between work, personal, and client accounts with one command.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/docs"
-              className="px-8 py-4 bg-accent text-white rounded-lg border-2 border-accent hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/30 transition-all duration-200 font-semibold text-lg">
-              Get Started
-            </Link>
-            <a
-              href="https://github.com/byterings/bgit"
-              className="px-8 py-4 border-2 border-gray-700 rounded-lg hover:border-accent hover:shadow-lg hover:shadow-accent/20 transition-all duration-200 font-semibold text-lg"
-              target="_blank"
-              rel="noopener noreferrer">
-              View on GitHub
-            </a>
+        <div className="max-w-7xl mx-auto lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 lg:items-center">
+          <div className="text-center lg:text-left">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6">bgit</h1>
+            <p className="text-3xl text-muted mb-8">
+              Stop switching Git accounts manually.
+              <br />
+              Manage multiple identities with one command.
+            </p>
+            <p className="text-xl text-foreground/90 mb-12 max-w-3xl mx-auto lg:mx-0 leading-relaxed">
+              Switch between work, personal, and client Git accounts instantly
+              — no config editing, no remote URL headaches.
+            </p>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+              <a
+                href="#quick-start"
+                className="inline-flex min-w-[168px] items-center justify-center rounded-xl border border-sky-200/70 bg-gradient-to-r from-cyan-200 via-sky-200 to-blue-300 px-8 py-4 text-lg font-semibold text-slate-950 shadow-[0_14px_34px_rgba(96,165,250,0.24)] transition-all duration-200 hover:-translate-y-0.5 hover:from-cyan-100 hover:via-sky-100 hover:to-blue-200 hover:shadow-[0_18px_40px_rgba(96,165,250,0.3)]">
+                Quick Start
+              </a>
+              <a
+                href="#why-bgit"
+                className="inline-flex min-w-[168px] items-center justify-center rounded-xl border border-white/14 bg-gradient-to-r from-white/7 to-sky-300/8 px-8 py-4 text-lg font-semibold text-white shadow-[0_12px_28px_rgba(15,23,42,0.2)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-200/30 hover:from-white/10 hover:to-sky-300/12 hover:shadow-[0_16px_34px_rgba(59,130,246,0.14)]">
+                Why bgit
+              </a>
+            </div>
+            <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm text-muted lg:justify-start">
+              <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                Built by developers, for developers
+              </div>
+              <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                Open source on GitHub
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-14 lg:mt-0">
+            <p className="mb-4 text-center text-sm font-semibold uppercase tracking-[0.22em] text-accent lg:text-left">
+              Real workflow in seconds
+            </p>
+            <HeroTerminalScene />
           </div>
         </div>
       </section>
 
+      <QuickInstallSection />
+
       {/* Problem/Solution Section */}
-      <section className="py-20 px-6 bg-[#0d0d0d]">
+      <section id="why-bgit" className="py-20 px-6 bg-[#0d0d0d]">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold mb-12 text-center">Why bgit?</h2>
 
@@ -84,19 +108,16 @@ export default function Home() {
                 <li className="flex gap-3">
                   <span className="text-red-400 mt-0.5">-</span>
                   <span>
-                    Manually editing <code>.gitconfig</code> and{" "}
-                    <code>.ssh/config</code> for each account
+                    Constantly switching SSH configs
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-red-400 mt-0.5">-</span>
-                  <span>
-                    Accidentally pushing commits with the wrong identity
-                  </span>
+                  <span>Pushing with wrong identity</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-red-400 mt-0.5">-</span>
-                  <span>Complex SSH host configurations for each account</span>
+                  <span>Fixing remotes again and again</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-red-400 mt-0.5">-</span>
@@ -186,10 +207,9 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold mb-2">Identity Switching</h3>
+              <h3 className="text-lg font-semibold mb-2">Switch accounts instantly</h3>
               <p className="text-muted text-sm">
-                Seamlessly switch between work, personal, and client accounts
-                with one command
+                No config edits. No mistakes.
               </p>
             </div>
 
@@ -315,7 +335,9 @@ export default function Home() {
       <section className="py-24 px-6 bg-[#0d0d0d]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to simplify your Git workflow?
+            Stop wasting time switching Git accounts
+            <br />
+            Start using bgit in seconds
           </h2>
           <p className="text-xl text-muted mb-12 max-w-2xl mx-auto">
             Join developers who use this CLI tool to manage multiple Git
@@ -324,12 +346,12 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/docs"
-              className="px-10 py-5 bg-accent text-white rounded-lg border-2 border-accent hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/30 transition-all duration-200 font-semibold text-lg">
+              className="inline-flex min-w-[190px] items-center justify-center rounded-xl border border-sky-200/70 bg-gradient-to-r from-cyan-200 via-sky-200 to-blue-300 px-10 py-5 text-lg font-semibold text-slate-950 shadow-[0_14px_34px_rgba(96,165,250,0.24)] transition-all duration-200 hover:-translate-y-0.5 hover:from-cyan-100 hover:via-sky-100 hover:to-blue-200 hover:shadow-[0_18px_40px_rgba(96,165,250,0.3)]">
               Get Started Now
             </Link>
             <Link
               href="/commands"
-              className="px-10 py-5 border-2 border-gray-700 rounded-lg hover:border-accent hover:shadow-lg hover:shadow-accent/20 transition-all duration-200 font-semibold text-lg">
+              className="inline-flex min-w-[190px] items-center justify-center rounded-xl border border-white/14 bg-gradient-to-r from-white/7 to-sky-300/8 px-10 py-5 text-lg font-semibold text-white shadow-[0_12px_28px_rgba(15,23,42,0.2)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-200/30 hover:from-white/10 hover:to-sky-300/12 hover:shadow-[0_16px_34px_rgba(59,130,246,0.14)]">
               View All Commands
             </Link>
           </div>

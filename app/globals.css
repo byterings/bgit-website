@@ -224,9 +224,291 @@ html.light .text-green-200 {
   color: #166534 !important;
 }
 
+/* Quick install section */
+.quick-install-surface {
+  border: 1px solid rgba(82, 168, 255, 0.18);
+  background: linear-gradient(180deg, rgba(82, 168, 255, 0.08), rgba(82, 168, 255, 0.03));
+}
+
+.quick-install-terminal {
+  border: 1px solid #1f2937;
+  background: linear-gradient(180deg, rgba(15, 15, 20, 0.98), rgba(10, 10, 10, 0.98));
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.quick-install-terminal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(20, 20, 28, 0.96);
+}
+
+.quick-install-shell {
+  letter-spacing: 0.16em;
+}
+
+.quick-install-block-label {
+  display: inline-flex;
+  align-items: center;
+  min-width: 12.5rem;
+  padding: 0.42rem 0.9rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--foreground);
+  letter-spacing: 0.01em;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+.quick-install-card-title {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.24);
+}
+
+.quick-install-card-title-install {
+  color: #8fd1ff;
+}
+
+.quick-install-card-title-identity {
+  color: #ffd166;
+}
+
+.quick-install-card-title-workflow {
+  color: #7bf0c8;
+}
+
+.quick-install-terminal:hover {
+  transform: translateY(-4px);
+}
+
+.quick-install-terminal-install {
+  border-color: rgba(82, 168, 255, 0.24);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(82, 168, 255, 0.06),
+    0 12px 30px rgba(82, 168, 255, 0.12);
+}
+
+.quick-install-terminal-install:hover {
+  border-color: rgba(82, 168, 255, 0.42);
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.24),
+    0 0 0 1px rgba(82, 168, 255, 0.1),
+    0 16px 34px rgba(82, 168, 255, 0.16);
+}
+
+.quick-install-terminal-identity {
+  border-color: rgba(251, 191, 36, 0.22);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(251, 191, 36, 0.05),
+    0 12px 30px rgba(251, 191, 36, 0.1);
+}
+
+.quick-install-terminal-identity:hover {
+  border-color: rgba(251, 191, 36, 0.4);
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.24),
+    0 0 0 1px rgba(251, 191, 36, 0.09),
+    0 16px 34px rgba(251, 191, 36, 0.14);
+}
+
+.quick-install-terminal-workflow {
+  border-color: rgba(52, 211, 153, 0.22);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(52, 211, 153, 0.05),
+    0 12px 30px rgba(52, 211, 153, 0.1);
+}
+
+.quick-install-terminal-workflow:hover {
+  border-color: rgba(52, 211, 153, 0.4);
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.24),
+    0 0 0 1px rgba(52, 211, 153, 0.09),
+    0 16px 34px rgba(52, 211, 153, 0.14);
+}
+
+.quick-install-tab {
+  box-shadow: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.quick-install-tab:hover {
+  transform: translateY(-1px);
+}
+
+.quick-install-content {
+  animation: quick-install-swap 260ms ease;
+}
+
+.quick-install-path {
+  color: #8b5cf6;
+}
+
+.quick-install-command {
+  color: #38bdf8;
+}
+
+.quick-install-status {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: #34d399;
+}
+
+.quick-install-detail {
+  white-space: pre-line;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+}
+
+html.light .quick-install-surface {
+  border-color: #bfdbfe;
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), rgba(255, 255, 255, 0.92));
+}
+
+html.light .quick-install-terminal {
+  border-color: #dbe3f0;
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+}
+
+html.light .quick-install-terminal-header {
+  border-bottom-color: #e5e7eb;
+  background: #f8fafc;
+}
+
+html.light .quick-install-card-title {
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.85);
+}
+
+html.light .quick-install-block-label {
+  color: #111827;
+  border-color: #dbe3f0;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+html.light .quick-install-card-title-install {
+  color: #1d4ed8;
+}
+
+html.light .quick-install-card-title-identity {
+  color: #b45309;
+}
+
+html.light .quick-install-card-title-workflow {
+  color: #047857;
+}
+
+html.light .quick-install-terminal:hover {
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+html.light .quick-install-terminal-install {
+  border-color: rgba(37, 99, 235, 0.22);
+  box-shadow:
+    0 14px 32px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(37, 99, 235, 0.05),
+    0 10px 24px rgba(37, 99, 235, 0.08);
+}
+
+html.light .quick-install-terminal-install:hover {
+  border-color: rgba(37, 99, 235, 0.34);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(37, 99, 235, 0.08),
+    0 12px 28px rgba(37, 99, 235, 0.1);
+}
+
+html.light .quick-install-terminal-identity {
+  border-color: rgba(217, 119, 6, 0.24);
+  box-shadow:
+    0 14px 32px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(217, 119, 6, 0.05),
+    0 10px 24px rgba(217, 119, 6, 0.08);
+}
+
+html.light .quick-install-terminal-identity:hover {
+  border-color: rgba(217, 119, 6, 0.36);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(217, 119, 6, 0.08),
+    0 12px 28px rgba(217, 119, 6, 0.1);
+}
+
+html.light .quick-install-terminal-workflow {
+  border-color: rgba(5, 150, 105, 0.24);
+  box-shadow:
+    0 14px 32px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(5, 150, 105, 0.05),
+    0 10px 24px rgba(5, 150, 105, 0.08);
+}
+
+html.light .quick-install-terminal-workflow:hover {
+  border-color: rgba(5, 150, 105, 0.36);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(5, 150, 105, 0.08),
+    0 12px 28px rgba(5, 150, 105, 0.1);
+}
+
+html.light .quick-install-tab {
+  background: #ffffff;
+  border-color: #d1d5db;
+}
+
+html.light .quick-install-path {
+  color: #7c3aed;
+}
+
+html.light .quick-install-command {
+  color: #0369a1;
+}
+
+html.light .quick-install-status {
+  color: #059669;
+}
+
+html.light .quick-install-detail {
+  color: #4b5563;
+}
+
 /* Light mode selection */
 html.light ::selection {
   background-color: rgba(37, 99, 235, 0.3);
+}
+
+@keyframes quick-install-swap {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Sidebar scrollbar styling */

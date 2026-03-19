@@ -4,17 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import CodeBlock from "../components/CodeBlock";
 import Accordion from "../components/Accordion";
-
-const sections = [
-  { id: "installation", label: "Installation" },
-  { id: "getting-started", label: "Getting Started" },
-  { id: "usage", label: "Usage Guide" },
-  { id: "workspaces", label: "Workspaces" },
-  { id: "identity-resolution", label: "Identity Resolution" },
-  { id: "configuration", label: "Configuration" },
-  { id: "troubleshooting", label: "Troubleshooting" },
-  { id: "faq", label: "FAQ" },
-];
+import { docsSections as sections, faqItems } from "../lib/docs";
 
 export default function DocsPage() {
   const [activeSection, setActiveSection] = useState("installation");
@@ -660,45 +650,7 @@ bgit bind --user work
                 Frequently Asked Questions
               </h2>
 
-              <Accordion
-                items={[
-                  {
-                    question: "Does bgit wrap Git commands?",
-                    answer:
-                      "No. bgit only manages your Git and SSH configuration. You continue using regular git commands after switching identities.",
-                  },
-                  {
-                    question: "What's the difference between workspaces and bindings?",
-                    answer:
-                      "Workspaces apply to all repos in a folder (created with 'bgit workspace'). Bindings apply to individual repos ('bgit bind'). Workspace takes priority over binding.",
-                  },
-                  {
-                    question: "How do I know which identity will be used?",
-                    answer:
-                      "Run 'bgit status' to see the effective identity and why (workspace, binding, or global).",
-                  },
-                  {
-                    question: "Can I use bgit with GitLab or Bitbucket?",
-                    answer:
-                      "Yes! While bgit is optimized for GitHub, the Git configuration changes work with any Git hosting service.",
-                  },
-                  {
-                    question: "Is my existing .gitconfig safe?",
-                    answer:
-                      "Yes. bgit only modifies user.name and user.email. All other settings are preserved.",
-                  },
-                  {
-                    question: "How do I fix SSH permission errors?",
-                    answer:
-                      "Run 'bgit doctor --fix' to automatically set correct permissions (700 for ~/.ssh, 600 for key files).",
-                  },
-                  {
-                    question: "How do I uninstall bgit?",
-                    answer:
-                      "Run 'bgit uninstall' to safely restore all repositories to standard GitHub format and remove bgit config. Then remove the binary: sudo rm /usr/local/bin/bgit",
-                  },
-                ]}
-              />
+              <Accordion items={faqItems} />
             </section>
 
             {/* Next Steps */}
