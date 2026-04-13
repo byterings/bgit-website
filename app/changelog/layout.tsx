@@ -1,25 +1,13 @@
 import type { Metadata } from "next";
 import JsonLd from "../components/JsonLd";
+import { createBreadcrumbJsonLd, createPageMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Changelog - bgit | Release History and Version Updates",
   description:
     "Track the evolution of bgit across releases. View all features, bug fixes, and breaking changes for every version of the bgit CLI tool.",
-  alternates: {
-    canonical: "https://bgit.byterings.com/changelog/",
-  },
-  openGraph: {
-    title: "Changelog - bgit | Release History and Version Updates",
-    description:
-      "Track the evolution of bgit across releases. All features, bug fixes, and breaking changes.",
-    url: "https://bgit.byterings.com/changelog/",
-  },
-  twitter: {
-    title: "Changelog - bgit | Release History and Version Updates",
-    description:
-      "Track the evolution of bgit across releases and version updates.",
-  },
-};
+  path: "/changelog/",
+});
 
 export default function ChangelogLayout({
   children,
@@ -29,14 +17,10 @@ export default function ChangelogLayout({
   return (
     <>
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://bgit.byterings.com/" },
-            { "@type": "ListItem", position: 2, name: "Changelog", item: "https://bgit.byterings.com/changelog/" },
-          ],
-        }}
+        data={createBreadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Changelog", path: "/changelog/" },
+        ])}
       />
       {children}
     </>

@@ -4,11 +4,11 @@
 
 ## Key Pages
 
-- Homepage: https://bgit.byterings.com/
-- Documentation: https://bgit.byterings.com/docs/
-- Commands: https://bgit.byterings.com/commands/
-- Changelog: https://bgit.byterings.com/changelog/
-- Support: https://bgit.byterings.com/support/
+- Homepage: https://bgitcli.com/
+- Documentation: https://bgitcli.com/docs/
+- Commands: https://bgitcli.com/commands/
+- Changelog: https://bgitcli.com/changelog/
+- Support: https://bgitcli.com/support/
 
 ## Recommended Core Flow
 
@@ -41,7 +41,6 @@
 - Written in Go
 - MIT License
 - Cross-platform: Linux, macOS, Windows
-- Stable release line: 0.2.x
-- Next phase in main branch: 0.3.0 (unreleased)
+- Current version on this site: 0.3.0
 - GitHub: https://github.com/byterings/bgit
 - Author: ByteRings (https://byterings.com)

@@ -54,6 +54,6 @@
 
   <!-- Bottom bar -->
   <rect x="0" y="560" width="1200" height="70" fill="#111111"/>
-  <text x="80" y="602" font-family="system-ui, sans-serif" font-size="18" fill="#6b7280">bgit.byterings.com</text>
+  <text x="80" y="602" font-family="system-ui, sans-serif" font-size="18" fill="#6b7280">bgitcli.com</text>
   <text x="1120" y="602" font-family="system-ui, sans-serif" font-size="16" fill="#6b7280" text-anchor="end">Free &amp; Open Source (MIT)</text>
 </svg>

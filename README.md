@@ -1,119 +1,88 @@
 # bgit Website
 
-Minimal documentation and download site for [bgit](https://github.com/byterings/bgit) - Multi-Git Identity Manager.
+Documentation, product marketing, and release-history site for [bgit](https://github.com/byterings/bgit).
 
-## Overview
+## What Lives Here
 
-This is a static Next.js site designed to be:
-- Developer-focused and content-first
-- Lightweight with no animations or heavy UI
-- Easy to update when documentation changes
-- Deployable to static hosting (Cloudflare Pages, GitHub Pages, Netlify, etc.)
+- `/` product overview and install entry points
+- `/docs/` guided documentation and FAQ
+- `/commands/` command reference
+- `/changelog/` release history sourced from changelog data
+- `/support/` support and contribution links
 
-## Tech Stack
+This repo should keep project-level documentation in `README.md`. Avoid adding new standalone top-level markdown guides unless they are genuinely required.
 
-- **Next.js 16** (App Router)
-- **TypeScript**
-- **Tailwind CSS v4**
-- **Static Export** (no server required)
+## Stack
+
+- Next.js 16 App Router
+- TypeScript
+- Tailwind CSS v4
+- Static export via `output: "export"`
 
 ## Development
 
 ```bash
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
+```
 
-# Build static site
+Production build:
+
+```bash
 npm run build
-
-# Output will be in ./out directory
 ```
 
-## Project Structure
-
-```
-bgit-website/
-├── app/
-│   ├── layout.tsx       # Root layout with metadata
-│   ├── page.tsx         # Main page (all sections)
-│   └── globals.css      # Global styles and Tailwind
-├── next.config.ts       # Next.js config (static export)
-├── tsconfig.json        # TypeScript config
-├── postcss.config.mjs   # PostCSS config for Tailwind
-└── package.json
-```
+The build runs `scripts/fetch-changelog.js` first. It tries to refresh `public/data/changelog.json` from the main `bgit` repository and falls back to the cached file if the network fetch fails.
 
 ## Deployment
 
-### Cloudflare Pages
+The site deploys as static files from `out/`.
 
-1. Connect your GitHub repository
-2. Build command: `npm run build`
-3. Output directory: `out`
+- Build command: `npm run build`
+- Output directory: `out`
+- Canonical production domain: `https://bgitcli.com`
 
-### Netlify
+This works on Cloudflare Pages, Netlify, GitHub Pages, Vercel static output, or any other static host.
 
-1. Connect your GitHub repository
-2. Build command: `npm run build`
-3. Publish directory: `out`
+## Content and Maintenance
 
-### GitHub Pages
+Primary update surfaces:
 
-1. Build locally: `npm run build`
-2. Push the `out` directory to `gh-pages` branch
-3. Enable GitHub Pages in repository settings
+- Home page: `app/page.tsx`
+- Docs page: `app/docs/page.tsx`
+- Commands page: `app/commands/page.tsx`
+- Changelog UI: `app/changelog/ChangelogContent.tsx`
+- Cached changelog data: `public/data/changelog.json`
+- Shared site config: `app/lib/config.ts`
+- Shared SEO helpers: `app/lib/seo.ts`
+- Generated crawl files: `app/robots.ts` and `app/sitemap.ts`
+- LLM metadata: `public/llms.txt`
 
-### Vercel
+Recommended update flow when `bgit` changes:
 
-1. Connect your GitHub repository
-2. Framework: Next.js
-3. Output directory will be detected automatically
+1. Update the main `bgit` repository behavior and docs first.
+2. Sync the website copy in `/docs` and `/commands`.
+3. Update changelog data or confirm the prebuild fetch will pull the latest release notes.
+4. Run `npm run build`.
+5. Spot-check `/`, `/docs/`, `/commands/`, `/changelog/`, and `/support/`.
 
-## Updating Content
+## SEO Notes
 
-All content is in [app/page.tsx](app/page.tsx). To update:
+The canonical host is owned by `app/lib/config.ts` and consumed through `app/lib/seo.ts`.
 
-1. Edit the JSX content directly
-2. Run `npm run dev` to preview changes
-3. Build and deploy: `npm run build`
+- Do not hardcode absolute site URLs in page metadata or JSON-LD.
+- Keep sitemap and robots generation in the App Router metadata routes.
+- If the domain ever changes, update the shared config first and verify the generated output in `out/`.
 
-Content can be extracted to separate files/components if needed in the future.
+## Verification
 
-## Design Principles
+Useful local checks:
 
-- **No animations** - Fast and accessible
-- **System fonts** - No custom font loading
-- **Dark theme** - Developer-friendly
-- **Minimal colors** - Dark neutrals with subtle blue accent
-- **Mobile-responsive** - Works on all devices
-- **SEO-friendly** - Proper meta tags and semantic HTML
-
-## Customization
-
-### Colors
-
-Edit colors in [app/globals.css](app/globals.css):
-
-```css
-:root {
-  --background: #0a0a0a;
-  --foreground: #e5e5e5;
-  --muted: #6b7280;
-  --accent: #3b82f6;
-}
+```bash
+npm run build
+rg -n "bgitcli.com" app public out README.md
 ```
-
-### Version Number
-
-Update the version in [app/page.tsx](app/page.tsx) footer section.
-
-### Contact Info
-
-Update email and links in the footer section of [app/page.tsx](app/page.tsx).
 
 ## License
 
-MIT License - Built for bgit by ByteRings
+MIT License. Site content and code maintained for the bgit project by ByteRings.

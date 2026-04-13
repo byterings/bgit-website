@@ -1,28 +1,23 @@
 import type { Metadata } from "next";
+import JsonLd from "../components/JsonLd";
+import { createBreadcrumbJsonLd, createPageMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Support the Project - bgit | Contribute and Help Improve bgit",
   description:
     "Ways to support and contribute to bgit development. Report issues, contribute code, support financially, or spread the word.",
-  alternates: {
-    canonical: "https://bgit.byterings.com/support/",
-  },
-  openGraph: {
-    title: "Support the Project - bgit",
-    description:
-      "Ways to support and contribute to bgit development. Report issues, contribute code, or spread the word.",
-    url: "https://bgit.byterings.com/support/",
-  },
-  twitter: {
-    title: "Support the Project - bgit",
-    description:
-      "Ways to support and contribute to bgit development.",
-  },
-};
+  path: "/support/",
+});
 
 export default function SupportPage() {
   return (
     <div className="pt-24 pb-20 px-6">
+      <JsonLd
+        data={createBreadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Support", path: "/support/" },
+        ])}
+      />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12 text-center">

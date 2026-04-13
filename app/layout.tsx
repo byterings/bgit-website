@@ -2,14 +2,23 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import { siteConfig } from "./lib/config";
+import { createPageMetadata, metadataBase } from "./lib/seo";
+
+const homeMetadata = createPageMetadata({
+  title: "bgit - CLI Tool for Multi-User Git Identity Management",
+  description:
+    "bgit is a powerful CLI tool for managing multiple Git identities. Switch between work, personal, and client accounts with one command. Automatic SSH key management, workspaces, and zero configuration mistakes.",
+  path: "/",
+});
 
 export const metadata: Metadata = {
-  title: "bgit - CLI Tool for Multi-User Git Identity Management",
-  description: "bgit is a powerful CLI tool for managing multiple Git identities. Switch between work, personal, and client accounts with one command. Automatic SSH key management, workspaces, and zero configuration mistakes.",
+  metadataBase,
+  ...homeMetadata,
   keywords: ["bgit", "git cli tool", "git identity manager", "multiple git accounts", "git multi-user", "ssh key management", "git account switcher", "developer tools", "command line tool"],
-  authors: [{ name: "Byterings" }],
-  creator: "Byterings",
-  publisher: "Byterings",
+  authors: [{ name: siteConfig.author }],
+  creator: siteConfig.author,
+  publisher: siteConfig.author,
   robots: {
     index: true,
     follow: true,
@@ -17,31 +26,6 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
     },
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://bgit.byterings.com/",
-    siteName: "bgit",
-    title: "bgit - CLI Tool for Multi-User Git Identity Management",
-    description: "A powerful CLI tool for managing multiple Git identities. Switch between accounts with one command, automatic SSH management, and workspace organization.",
-    images: [
-      {
-        url: "https://bgit.byterings.com/images/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "bgit - CLI Tool for Multi-User Git Identity Management",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "bgit - CLI Tool for Multi-User Git Identity Management",
-    description: "A powerful CLI tool for managing multiple Git identities. Switch between accounts with one command.",
-    images: ["https://bgit.byterings.com/images/og-image.svg"],
-  },
-  alternates: {
-    canonical: "https://bgit.byterings.com/",
   },
   icons: {
     icon: "/images/favicon.ico",

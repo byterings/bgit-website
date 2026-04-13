@@ -3,6 +3,7 @@ import HeroTerminalScene from "./components/HeroTerminalScene";
 import JsonLd from "./components/JsonLd";
 import QuickInstallSection from "./components/QuickInstallSection";
 import { siteConfig } from "./lib/config";
+import { absoluteUrl } from "./lib/seo";
 
 export default function Home() {
   return (
@@ -21,14 +22,15 @@ export default function Home() {
             price: "0",
             priceCurrency: "USD",
           },
-          url: "https://bgit.byterings.com",
-          downloadUrl: "https://github.com/byterings/bgit/releases",
+          url: siteConfig.url,
+          downloadUrl: siteConfig.releases,
           softwareVersion: siteConfig.version,
           author: {
             "@type": "Organization",
-            name: "ByteRings",
-            url: "https://byterings.com",
+            name: siteConfig.author,
+            url: siteConfig.authorUrl,
           },
+          image: absoluteUrl(siteConfig.ogImage),
         }}
       />
       {/* Hero Section */}
