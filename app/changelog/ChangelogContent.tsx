@@ -36,7 +36,10 @@ interface ChangelogContentProps {
 const phaseNames: Record<number, string> = {
   1: "Core Identity Management",
   2: "Repository-Aware Identity",
-  3: "Shell Integration & Safety"
+  3: "Shell Integration & Safety",
+  4: "Core Extraction Milestone",
+  5: "Validation & Stability",
+  6: "Encrypted Backup Portability",
 };
 
 export default function ChangelogContent({ changelog }: ChangelogContentProps) {

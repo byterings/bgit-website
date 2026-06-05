@@ -32,7 +32,7 @@ Production build:
 npm run build
 ```
 
-The build runs `scripts/fetch-changelog.js` first. It tries to refresh `public/data/changelog.json` from the main `bgit` repository and falls back to the cached file if the network fetch fails.
+The build runs `scripts/fetch-release-data.js` first. It tries to refresh both the current bgit `version.txt` and `changelog.json` from the main `bgit` repository, then regenerates local release metadata files. If the network fetch fails, it falls back to the committed local copies.
 
 ## Deployment
 
@@ -52,7 +52,9 @@ Primary update surfaces:
 - Docs page: `app/docs/page.tsx`
 - Commands page: `app/commands/page.tsx`
 - Changelog UI: `app/changelog/ChangelogContent.tsx`
+- Release data sync: `scripts/fetch-release-data.js`
 - Cached changelog data: `public/data/changelog.json`
+- Generated version source: `app/lib/generated-release.ts`
 - Shared site config: `app/lib/config.ts`
 - Shared SEO helpers: `app/lib/seo.ts`
 - Generated crawl files: `app/robots.ts` and `app/sitemap.ts`
@@ -62,7 +64,7 @@ Recommended update flow when `bgit` changes:
 
 1. Update the main `bgit` repository behavior and docs first.
 2. Sync the website copy in `/docs` and `/commands`.
-3. Update changelog data or confirm the prebuild fetch will pull the latest release notes.
+3. Update `version.txt` and changelog data in `bgit`, or confirm the prebuild fetch will pull the latest release metadata.
 4. Run `npm run build`.
 5. Spot-check `/`, `/docs/`, `/commands/`, `/changelog/`, and `/support/`.
 

@@ -80,6 +80,14 @@ export default function DocsPage() {
               },
               {
                 "@type": "Question",
+                name: "How do I back up my bgit setup?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Run 'bgit export' to create an encrypted .bgit archive. You will be prompted for an export password interactively, and that password is required later for import.",
+                },
+              },
+              {
+                "@type": "Question",
                 name: "How do I fix SSH permission errors?",
                 acceptedAnswer: {
                   "@type": "Answer",
@@ -237,7 +245,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                   <h4 className="font-semibold mb-3">Verify Installation</h4>
                   <CodeBlock>{`bgit --version`}</CodeBlock>
                   <p className="text-muted text-sm mt-3">
-                    You should see the version number printed
+                    You should see the latest version from the bgit release feed.
                   </p>
                 </div>
               </div>
@@ -348,6 +356,16 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                     title: "Updating SSH Keys",
                     cmd: "bgit update work --ssh-key ~/.ssh/new_key",
                     desc: "Updates the SSH key for an existing identity. Useful for adding a key to a user created without one.",
+                  },
+                  {
+                    title: "Creating Encrypted Backups",
+                    cmd: "bgit export",
+                    desc: "Creates an encrypted .bgit archive containing your configuration and configured SSH key pairs. The export password is prompted interactively.",
+                  },
+                  {
+                    title: "Restoring from Backup",
+                    cmd: "bgit import backup-2026-06-02.bgit",
+                    desc: "Decrypts an encrypted .bgit archive, validates the stored config, restores users, and rewrites SSH key paths for the target machine.",
                   },
                 ].map(({ title, cmd, desc }) => (
                   <div
@@ -559,6 +577,62 @@ bgit bind --user work
                     All other Git settings remain unchanged.
                   </p>
                 </div>
+              </div>
+            </section>
+
+            <section id="backups" className="mb-16 scroll-mt-28">
+              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+                Backups &amp; Restore
+              </h2>
+
+              <p className="text-muted mb-6">
+                bgit can create encrypted backup archives of your identities and
+                configured SSH keys, then restore them safely on the same machine
+                or another one.
+              </p>
+
+              <div className="space-y-6">
+                <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-4 lg:p-5">
+                  <h3 className="font-semibold mb-3">Create an encrypted backup</h3>
+                  <CodeBlock>{`bgit export`}</CodeBlock>
+                  <p className="text-muted text-sm mt-3">
+                    bgit prompts you for the export password interactively. That
+                    password is required later for import and cannot be recovered
+                    if forgotten.
+                  </p>
+                </div>
+
+                <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-4 lg:p-5">
+                  <h3 className="font-semibold mb-3">Restore a backup archive</h3>
+                  <CodeBlock>{`bgit import backup-2026-06-02.bgit`}</CodeBlock>
+                  <p className="text-muted text-sm mt-3">
+                    Import prompts for the archive password, decrypts the backup,
+                    validates the restored config, restores identities, and rewrites
+                    SSH key paths for the current machine.
+                  </p>
+                </div>
+
+                <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-4 lg:p-5">
+                  <h3 className="font-semibold mb-3">Portable SSH key restore</h3>
+                  <p className="text-muted text-sm mb-3">
+                    Backups include configured identity SSH private and public keys
+                    so you can restore them without regenerating new keys.
+                  </p>
+                  <CodeBlock>{`# Export on Machine A
+bgit export
+
+# Import on Machine B
+bgit import backup-2026-06-02.bgit
+bgit status`}</CodeBlock>
+                </div>
+              </div>
+
+              <div className="mt-6 bg-blue-950/20 border border-blue-800/30 rounded-lg p-4 lg:p-5">
+                <p className="text-blue-200 text-sm">
+                  <strong>Important:</strong> export and import passwords are
+                  entered interactively. They are not accepted through command-line
+                  arguments.
+                </p>
               </div>
             </section>
 

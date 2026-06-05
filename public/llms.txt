@@ -27,6 +27,8 @@
 - `bgit doctor`: Diagnose configuration issues
 - `bgit sync [--fix]`: Validate/fix config alignment
 - `bgit remote fix|restore`: Advanced remote URL management
+- `bgit export`: Create an encrypted bgit backup archive
+- `bgit import <archive.bgit>`: Restore bgit from an encrypted archive
 - `bgit update <alias>`: Update SSH key path
 - `bgit delete <alias>`: Remove an identity
 - `bgit uninstall`: Safe uninstall and cleanup
@@ -41,6 +43,6 @@
 - Written in Go
 - MIT License
 - Cross-platform: Linux, macOS, Windows
-- Current version on this site: 0.3.0
+- Current version on this site: 0.6.0
 - GitHub: https://github.com/byterings/bgit
 - Author: ByteRings (https://byterings.com)

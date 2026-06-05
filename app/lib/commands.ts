@@ -145,6 +145,24 @@ export const bgitCommands: CommandDoc[] = [
     example: "bgit doctor --fix",
   },
   {
+    id: "export",
+    name: "bgit export",
+    description: "Create an encrypted bgit backup archive",
+    usage: "bgit export",
+    details:
+      "Creates an encrypted .bgit backup archive containing your bgit configuration and configured SSH key pairs. The command prompts interactively for an export password and never accepts the password through command-line flags.",
+    example: null,
+  },
+  {
+    id: "import",
+    name: "bgit import",
+    description: "Restore bgit from an encrypted backup archive",
+    usage: "bgit import <archive.bgit>",
+    details:
+      "Prompts for the archive password, decrypts the encrypted .bgit archive, validates the restored configuration, and restores users, active identity, and target-machine SSH key paths.",
+    example: "bgit import backup-2026-06-02.bgit",
+  },
+  {
     id: "delete",
     name: "bgit delete",
     description: "Remove an identity",
@@ -184,9 +202,10 @@ export const bgitCommands: CommandDoc[] = [
     id: "uninstall",
     name: "bgit uninstall",
     description: "Safely uninstall bgit",
-    usage: "bgit uninstall\nbgit uninstall --force\nbgit uninstall --skip-repos",
+    usage:
+      "bgit uninstall\nbgit uninstall --force\nbgit uninstall --skip-repos\nbgit uninstall --remove-keys",
     details:
-      "Safely uninstalls bgit by scanning for repositories with bgit remote URLs and restoring them to standard GitHub format. Removes bgit SSH config entries and configuration directory. Use --skip-repos to skip repository scanning, --force to skip confirmation.",
+      "Safely uninstalls bgit by restoring repositories with bgit remote URLs, removing bgit SSH config entries, restoring managed hook and Git identity state, and removing the bgit configuration directory. Use --skip-repos to skip repository scanning, --force to skip confirmation, and --remove-keys to delete bgit-generated SSH keys referenced in config.",
     example: null,
   },
   {

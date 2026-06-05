@@ -10,6 +10,7 @@ const popularCommandIds = [
   "use",
   "active",
   "clone",
+  "export",
   "remote-fix",
   "status",
   "doctor",
@@ -255,6 +256,18 @@ bgit workspace
 # Clone in workspace - auto identity!
 cd ~/projects/work
 bgit clone https://github.com/company/repo.git`}</CodeBlock>
+                </div>
+
+                <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-4 lg:p-5">
+                  <h3 className="font-semibold mb-3 lg:mb-4">Encrypted Backups</h3>
+                  <CodeBlock>{`# Create encrypted backup
+bgit export
+
+# Restore on this or another machine
+bgit import backup-2026-06-02.bgit
+
+# Verify restored identity
+bgit status`}</CodeBlock>
                 </div>
 
                 <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-4 lg:p-5">

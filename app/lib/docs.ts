@@ -98,6 +98,21 @@ export const docsSections: DocsSection[] = [
     ],
   },
   {
+    id: "backups",
+    label: "Backups & Restore",
+    description:
+      "Create encrypted bgit backup archives and restore them safely on the same or another machine.",
+    keywords: [
+      "export",
+      "import",
+      "backup",
+      "restore",
+      "encrypted archive",
+      "portable ssh keys",
+      "password",
+    ],
+  },
+  {
     id: "troubleshooting",
     label: "Troubleshooting",
     description:
@@ -154,6 +169,11 @@ export const faqItems: FaqItem[] = [
     question: "Is my existing .gitconfig safe?",
     answer:
       "Yes. bgit only modifies user.name and user.email. All other settings are preserved.",
+  },
+  {
+    question: "How do I back up my bgit setup?",
+    answer:
+      "Run 'bgit export' to create an encrypted .bgit archive. You'll be prompted for the export password interactively, and that password is required later for import.",
   },
   {
     question: "How do I fix SSH permission errors?",

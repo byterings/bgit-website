@@ -1,5 +1,7 @@
+import { bgitVersion } from "./generated-release";
+
 export const siteConfig = {
-  version: "0.3.0",
+  version: bgitVersion,
   url: "https://bgitcli.com",
   github: "https://github.com/byterings/bgit",
   releases: "https://github.com/byterings/bgit/releases",
