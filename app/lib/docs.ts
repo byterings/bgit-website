@@ -15,9 +15,14 @@ export const docsSections: DocsSection[] = [
     id: "installation",
     label: "Installation",
     description:
-      "Install bgit on Linux, macOS, or Windows and verify the CLI is available.",
+      "Install the bgit desktop app or CLI on Linux, macOS, or Windows.",
     keywords: [
       "install",
+      "desktop app",
+      "installer",
+      "dmg",
+      "deb",
+      "download app",
       "download",
       "linux",
       "macos",
@@ -183,6 +188,6 @@ export const faqItems: FaqItem[] = [
   {
     question: "How do I uninstall bgit?",
     answer:
-      "Run 'bgit uninstall' to safely restore all repositories to standard GitHub format and remove bgit config. Then remove the binary: sudo rm /usr/local/bin/bgit",
+      "CLI: run 'bgit uninstall' to safely restore all repositories to standard GitHub format and remove bgit config, then remove the binary (sudo rm /usr/local/bin/bgit). Desktop app: choose Settings, Advanced, Remove bgit from this computer, then uninstall the app like any other app. Skip the removal step if you keep using the other one, because the CLI and the app share the same setup.",
   },
 ];
