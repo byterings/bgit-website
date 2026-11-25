@@ -6,6 +6,28 @@ import CodeBlock from "../components/CodeBlock";
 import Accordion from "../components/Accordion";
 import { docsSections as sections, faqItems } from "../lib/docs";
 
+const RELEASE_DOWNLOAD = "https://github.com/byterings/bgit/releases/latest/download";
+
+// Desktop app downloads. File names stay the same from release to release, so
+// these links always point at the newest version.
+const desktopDownloads = [
+  {
+    os: "Windows",
+    requirement: "Windows 10 or 11, 64-bit",
+    file: "bgit-desktop-windows-amd64-installer.exe",
+  },
+  {
+    os: "macOS",
+    requirement: "macOS 11 or later, Intel and Apple Silicon",
+    file: "bgit-desktop-darwin-universal.dmg",
+  },
+  {
+    os: "Linux",
+    requirement: "Ubuntu 22.04+, Debian 12+, 64-bit",
+    file: "bgit-desktop-linux-amd64.deb",
+  },
+];
+
 export default function DocsPage() {
   const [activeSection, setActiveSection] = useState("installation");
 
@@ -99,7 +121,7 @@ export default function DocsPage() {
                 name: "How do I uninstall bgit?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Run 'bgit uninstall' to safely restore all repositories to standard GitHub format and remove bgit config. Then remove the binary: sudo rm /usr/local/bin/bgit",
+                  text: "CLI: run 'bgit uninstall' to safely restore all repositories to standard GitHub format and remove bgit config, then remove the binary (sudo rm /usr/local/bin/bgit). Desktop app: choose Settings, Advanced, Remove bgit from this computer, then uninstall the app like any other app. Skip the removal step if you keep using the other one, because the CLI and the app share the same setup.",
                 },
               },
             ],
@@ -148,8 +170,8 @@ export default function DocsPage() {
                 Documentation
               </h1>
               <p className="text-xl text-muted">
-                Complete guide to using the bgit CLI tool for managing multiple
-                Git identities
+                Complete guide to the bgit desktop app and CLI for managing
+                multiple Git identities
               </p>
             </div>
 
@@ -175,9 +197,142 @@ export default function DocsPage() {
               </h2>
 
               <div className="space-y-8">
+                <p className="text-muted">
+                  bgit comes as a desktop app and as a command-line tool (CLI).
+                  Each works on its own, and they share the same settings, so
+                  you can install one or both. Both use the Git already on your
+                  computer: check with <code>git --version</code>, and if it is
+                  missing install{" "}
+                  <a className="text-accent hover:underline" style={{ color: "var(--accent)" }} href="https://git-scm.com/download/win">Git for Windows</a>,
+                  run <code>xcode-select --install</code> on macOS, or install
+                  the <code>git</code> package on Linux.
+                </p>
+
+                {/* Desktop app */}
+                <div id="desktop-app" className="space-y-6 scroll-mt-28">
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-2">Desktop app</h3>
+                    <p className="text-muted">
+                      Identities, SSH keys, cloning, and everyday commit, pull,
+                      and push, without a terminal. Download for your system:
+                    </p>
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-3">
+                    {desktopDownloads.map(({ os, requirement, file }) => (
+                      <a
+                        key={os}
+                        href={`${RELEASE_DOWNLOAD}/${file}`}
+                        className="block rounded-lg border border-gray-800 bg-[#0d0d0d] p-5 transition hover:border-accent/60">
+                        <div className="text-lg font-semibold">{os}</div>
+                        <div className="text-sm text-muted">{requirement}</div>
+                        <div className="mt-3 break-all font-mono text-sm text-[var(--accent)]">
+                          {file}
+                        </div>
+                        <div className="mt-3 text-sm font-semibold">Download &darr;</div>
+                      </a>
+                    ))}
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3 text-accent">Windows</h4>
+                    <ol className="list-decimal space-y-2 pl-6 text-foreground/90">
+                      <li>Download and open <code>bgit-desktop-windows-amd64-installer.exe</code>.</li>
+                      <li>
+                        If Windows shows &ldquo;Windows protected your PC&rdquo;, choose{" "}
+                        <strong>More info</strong>, then <strong>Run anyway</strong>. This
+                        appears until releases are code signed.
+                      </li>
+                      <li>
+                        Allow the installer to make changes. It installs for all users
+                        into <code>C:\Program Files\ByteRings\bgit</code> and adds Start
+                        menu and desktop shortcuts.
+                      </li>
+                      <li>Open <strong>bgit</strong> from the Start menu.</li>
+                    </ol>
+                    <p className="text-muted text-sm mt-3">
+                      The app uses Microsoft Edge WebView2, which Windows 10 and 11
+                      normally have; if it is missing the installer downloads it. No
+                      admin rights? <a className="text-accent hover:underline" style={{ color: "var(--accent)" }} href={`${RELEASE_DOWNLOAD}/bgit-desktop-windows-amd64.exe`}>bgit-desktop-windows-amd64.exe</a>{" "}
+                      is the same app without an installer. To update, run the newest
+                      installer. To uninstall: Settings, Apps, Installed apps, bgit.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3 text-accent">macOS</h4>
+                    <ol className="list-decimal space-y-2 pl-6 text-foreground/90">
+                      <li>Download and open <code>bgit-desktop-darwin-universal.dmg</code>.</li>
+                      <li>Drag <strong>bgit</strong> onto <strong>Applications</strong>.</li>
+                      <li>Open bgit from Applications or Launchpad.</li>
+                      <li>
+                        If macOS says the app cannot be opened or verified, open{" "}
+                        <strong>System Settings &rarr; Privacy &amp; Security</strong>, scroll
+                        down, and choose <strong>Open Anyway</strong>. This appears until
+                        releases are signed and notarized.
+                      </li>
+                    </ol>
+                    <p className="text-muted text-sm mt-3">
+                      Terminal alternative for step 4:{" "}
+                      <code>xattr -dr com.apple.quarantine /Applications/bgit.app</code>.
+                      To update, drag the newest version to Applications again. To
+                      uninstall, move bgit from Applications to the Bin.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3 text-accent">Linux</h4>
+                    <p className="text-muted mb-3 text-sm">
+                      <strong>Ubuntu 22.04+, Debian 12+, Linux Mint 21+</strong> and other
+                      Debian-based systems. <code>apt</code> also installs GTK, WebKitGTK,
+                      Git, and OpenSSH.
+                    </p>
+                    <CodeBlock className="mb-3">{`curl -LO ${RELEASE_DOWNLOAD}/bgit-desktop-linux-amd64.deb
+sudo apt install ./bgit-desktop-linux-amd64.deb`}</CodeBlock>
+                    <p className="text-muted text-sm mb-4">
+                      Start <strong>bgit</strong> from the applications menu or run{" "}
+                      <code>bgit-desktop</code>. Update by installing the newest{" "}
+                      <code>.deb</code> the same way; uninstall with{" "}
+                      <code>sudo apt remove bgit-desktop</code>.
+                    </p>
+                    <p className="text-muted mb-3 text-sm">
+                      <strong>Other distributions:</strong> install GTK 3 and WebKitGTK
+                      4.1, then run the program file.
+                    </p>
+                    <CodeBlock>{`# Fedora
+sudo dnf install gtk3 webkit2gtk4.1 git openssh-clients
+# Arch
+sudo pacman -S gtk3 webkit2gtk-4.1 git openssh
+
+curl -L ${RELEASE_DOWNLOAD}/bgit-desktop-linux-amd64 -o bgit-desktop
+chmod +x bgit-desktop
+mkdir -p ~/.local/bin && mv bgit-desktop ~/.local/bin/
+bgit-desktop`}</CodeBlock>
+                  </div>
+
+                  <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-5">
+                    <h4 className="font-semibold mb-3">First launch</h4>
+                    <p className="text-muted text-sm">
+                      The app walks you through setup: it checks Git, turns on push
+                      protection, and adds your first identity with an SSH key, or
+                      restores everything from a <code>.bgit</code> backup. If you
+                      already use the CLI, your identities and repositories are
+                      picked up as they are.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Command-line tool */}
+                <div id="cli" className="scroll-mt-28">
+                  <h3 className="text-2xl font-semibold mb-2">Command-line tool (CLI)</h3>
+                  <p className="text-muted">
+                    For terminals and scripts. Install it with one command:
+                  </p>
+                </div>
+
                 {/* Linux */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
+                  <h4 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
                     <svg
                       aria-hidden="true"
                       className="w-6 h-6"
@@ -186,7 +341,7 @@ export default function DocsPage() {
                       <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2.025.134.063.198.114.333l.003.003c.391.778 1.113 1.132 1.884 1.071.771-.06 1.592-.536 2.257-1.306.631-.765 1.683-1.084 2.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357 0 00-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529 3.405h.013c.213 0 .396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724 0-.02.006-.04.006-.06v.105a.086.086 0 01-.004-.021l-.004-.024a1.807 1.807 0 01-.15.706.953.953 0 01-.213.335.71.71 0 00-.088-.042c-.104-.045-.198-.064-.284-.133a1.312 1.312 0 00-.22-.066c.05-.06.146-.133.183-.198.053-.128.082-.264.088-.402v-.02a1.21 1.21 0 00-.061-.4c-.045-.134-.101-.2-.183-.333-.084-.066-.167-.132-.267-.132h-.016c-.093 0-.176.03-.262.132a.8.8 0 00-.205.334 1.18 1.18 0 00-.09.4v.019c.002.089.008.179.02.267-.193-.067-.438-.135-.607-.202a1.635 1.635 0 01-.018-.2v-.02a1.772 1.772 0 01.15-.768c.082-.22.232-.406.43-.533a.985.985 0 01.594-.2zm-2.962.059h.036c.142 0 .27.048.399.135.146.129.264.288.344.465.09.199.14.4.153.667v.004c.007.134.006.2-.002.266v.08c-.03.007-.056.018-.083.024-.152.055-.274.135-.393.2.012-.09.013-.18.003-.267v-.015c-.012-.133-.04-.2-.082-.333a.613.613 0 00-.166-.267.248.248 0 00-.183-.064h-.021c-.071.006-.13.04-.186.132a.552.552 0 00-.12.27.944.944 0 00-.023.33v.015c.012.135.037.2.08.334.046.134.098.2.166.268.01.009.02.018.034.024-.07.057-.117.07-.176.136a.304.304 0 01-.131.068 2.62 2.62 0 01-.275-.402 1.772 1.772 0 01-.155-.667 1.759 1.759 0 01.08-.668 1.43 1.43 0 01.283-.535c.128-.133.26-.2.418-.2zm1.37 1.706c.332 0 .733.065 1.216.399.293.2.523.269 1.052.468h.003c.255.136.405.266.478.399v-.131a.571.571 0 01.016.47c-.123.31-.516.643-1.063.842v.002c-.268.135-.501.333-.775.465-.276.135-.588.292-1.012.267a1.139 1.139 0 01-.448-.067 3.566 3.566 0 01-.322-.198c-.195-.135-.363-.332-.612-.465v-.005h-.005c-.4-.246-.616-.512-.686-.71-.07-.268-.005-.47.193-.6.224-.135.38-.271.483-.336.104-.074.143-.102.176-.131h.002v-.003c.169-.202.436-.47.839-.601.139-.036.294-.065.466-.065zm2.8 2.142c.358 1.417 1.196 3.475 1.735 4.473.286.534.855 1.659 1.102 3.024.156-.005.33.018.513.064.646-1.671-.546-3.467-1.089-3.966-.22-.2-.232-.335-.123-.335.59.534 1.365 1.572 1.646 2.757.13.535.16 1.104.021 1.67.067.028.135.06.205.067 1.032.534 1.413.938 1.23 1.537v-.043c-.06-.003-.12 0-.18 0h-.016c.151-.467-.182-.825-1.065-1.224-.915-.4-1.646-.336-1.77.465-.008.043-.013.066-.018.135-.068.023-.139.053-.209.064-.43.268-.662.669-.793 1.187-.13.533-.17 1.156-.205 1.869v.003c-.02.482-.04.965-.07 1.39l-.002.006a.398.398 0 01-.067-.134v-.003c-.094-.15-.255-.328-.373-.465-.157-.2-.256-.4-.317-.535-.078-.167-.12-.267-.163-.333a.347.347 0 00-.107-.133l-.005.003a.332.332 0 00-.12-.064c-.166-.067-.265-.2-.36-.333-.096-.133-.19-.266-.26-.4-.143-.266-.238-.533-.358-.8-.12-.266-.241-.533-.42-.8a4.26 4.26 0 00-.267-.334c-.02-.022-.037-.045-.058-.066-.49-.6-1.036-.933-1.536-1.067-.498-.133-1.012-.133-1.49-.066a4.015 4.015 0 00-1.106.333 4.463 4.463 0 00-.665.402c-.198.135-.338.27-.47.4-.263.267-.468.535-.675.802-.207.267-.418.6-.616.935-.096.135-.192.27-.284.4-.09.133-.186.266-.26.4-.14.266-.256.533-.367.8-.11.266-.22.533-.291.8-.053.2-.096.4-.127.533-.17.867-.254 1.6.008 2.468.262.867.773 1.736 1.707 2.536.934.8 2.285 1.533 4.206 1.866l.021.004c.196.032.393.06.591.084.667.08 1.35.116 2.046.111h.072c.267-.005.532-.02.793-.044.392-.033.774-.087 1.15-.158.087-.016.175-.033.26-.054.174-.04.344-.086.511-.138.109-.033.216-.07.323-.106.195-.067.385-.14.572-.22l.117-.052c.15-.067.297-.138.44-.213.109-.058.215-.119.318-.183.075-.045.148-.092.22-.14.168-.112.33-.23.482-.356.177-.148.344-.304.496-.468.055-.059.108-.12.16-.181.105-.122.2-.25.29-.38.039-.055.078-.112.114-.169l.036-.055c.035-.054.068-.11.1-.167.017-.03.034-.061.05-.092.05-.09.096-.184.138-.278l.021-.049c.021-.047.04-.095.057-.144.135-.401.172-.78.105-1.134v-.004c-.104.027-.202.068-.307.092-.02.024-.038.05-.058.074l-.045.06c-.165.218-.385.381-.64.481l-.049.019c-.111.044-.227.077-.344.103-.217.047-.44.065-.663.065-.224 0-.447-.017-.663-.064-.109-.024-.216-.056-.322-.094-.12-.044-.236-.095-.344-.153-.193-.103-.367-.228-.517-.379l-.012-.012c-.103-.102-.189-.215-.26-.335-.037-.062-.07-.127-.099-.192l-.013-.029a1.449 1.449 0 01-.064-.184c-.037-.126-.067-.267-.088-.402-.019-.133-.03-.266-.032-.4 0-.066-.002-.133 0-.2v-.022c.003-.133.013-.266.028-.4.031-.266.084-.533.168-.8.043-.133.095-.266.154-.4.06-.133.128-.266.205-.399.153-.266.346-.532.588-.799l.03-.03c.106-.113.218-.22.336-.32l.068-.055c.045-.035.091-.069.137-.101.152-.105.312-.199.479-.284h.003c.212-.107.437-.197.664-.27.058-.018.115-.036.173-.051.206-.058.418-.1.632-.13.107-.014.214-.026.322-.033h.001c.269-.022.54-.018.81.003.135.012.266.03.397.052.133.023.266.051.398.086.253.07.497.164.734.287l.016.01.066.037c.148.088.284.189.412.298.033.028.065.057.095.086.116.109.222.228.318.358.037.049.073.1.107.151.027.04.051.081.075.122l.006.01c.02.036.04.072.058.109l.014.03c.067.142.12.29.156.442l.006.027a.86.86 0 01.017.091c.007.041.012.083.015.125l.002.018.001.022v.028c.001.035 0 .07-.002.105l-.006.034a.87.87 0 01-.023.122l-.01.035c-.01.038-.024.076-.04.114l-.006.018a.616.616 0 01-.07.122c-.033.045-.07.087-.112.125l-.037.033a.46.46 0 01-.14.09c-.06.028-.124.049-.19.061a.613.613 0 01-.153.014h-.017a.584.584 0 01-.14-.02.49.49 0 01-.115-.05l-.02-.011a.477.477 0 01-.087-.06.41.41 0 01-.058-.055.33.33 0 01-.038-.049.29.29 0 01-.04-.079.244.244 0 01-.013-.068.19.19 0 010-.054c.003-.02.008-.039.016-.057a.24.24 0 01.032-.05c.013-.016.029-.03.046-.043.02-.014.04-.025.063-.034.024-.01.05-.016.076-.019a.345.345 0 01.082 0c.026.003.052.01.076.02.021.008.042.02.06.033l.015.012c.015.012.028.025.04.04l.01.013c.01.013.019.028.026.044l.006.014c.006.016.011.032.014.049l.002.017c.002.018.003.035.002.053 0 .017-.003.034-.008.05l-.005.013c-.005.015-.012.03-.02.044l-.004.007a.209.209 0 01-.037.045l-.003.003a.193.193 0 01-.053.035c-.02.01-.041.016-.063.02a.209.209 0 01-.067.002.195.195 0 01-.063-.02.18.18 0 01-.05-.04.164.164 0 01-.03-.055.155.155 0 01-.005-.066.142.142 0 01.02-.058.125.125 0 01.04-.042c.018-.012.039-.02.06-.024a.144.144 0 01.065.002c.021.006.04.016.056.03.016.013.029.03.037.048a.12.12 0 01.01.058.108.108 0 01-.018.051.093.093 0 01-.04.033.089.089 0 01-.052.006.078.078 0 01-.041-.022.07.07 0 01-.019-.038.063.063 0 01.009-.04.06.06 0 01.032-.024.059.059 0 01.04.001.05.05 0 01.027.022.047.047 0 01.006.032.04.04 0 01-.017.025.037.037 0 01-.028.006.033.033 0 01-.02-.015.029.029 0 01-.002-.022.025.025 0 01.013-.015.022.022 0 01.017-.001.019.019 0 01.01.011.016.016 0 010 .014l-.004.004z" />
                     </svg>
                     Linux
-                  </h3>
+                  </h4>
                   <CodeBlock>{`curl -L https://github.com/byterings/bgit/releases/latest/download/bgit-linux-amd64 -o bgit
 chmod +x bgit
 sudo mv bgit /usr/local/bin/`}</CodeBlock>
@@ -198,7 +353,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
 
                 {/* macOS */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
+                  <h4 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
                     <svg
                       aria-hidden="true"
                       className="w-6 h-6"
@@ -207,7 +362,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                       <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" />
                     </svg>
                     macOS
-                  </h3>
+                  </h4>
                   <p className="text-muted mb-3 text-sm">
                     <strong>Intel Macs:</strong>
                   </p>
@@ -224,7 +379,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
 
                 {/* Windows */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
+                  <h4 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
                     <svg
                       aria-hidden="true"
                       className="w-6 h-6"
@@ -233,7 +388,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                       <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801" />
                     </svg>
                     Windows
-                  </h3>
+                  </h4>
                   <p className="text-foreground font-bold mb-3 text-sm">
                     Run this command in PowerShell:
                   </p>
@@ -242,7 +397,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
 
                 {/* Verify Installation */}
                 <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-5">
-                  <h4 className="font-semibold mb-3">Verify Installation</h4>
+                  <h4 className="font-semibold mb-3">Verify the CLI</h4>
                   <CodeBlock>{`bgit --version`}</CodeBlock>
                   <p className="text-muted text-sm mt-3">
                     You should see the latest version from the bgit release feed.

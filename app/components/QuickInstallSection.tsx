@@ -25,6 +25,15 @@ interface InstallTab {
   cards: TerminalCardData[];
 }
 
+const RELEASE_DOWNLOAD = 'https://github.com/byterings/bgit/releases/latest/download';
+
+// The desktop app, for people who prefer not to use a terminal.
+const desktopDownloads = [
+  { label: 'Windows', file: 'bgit-desktop-windows-amd64-installer.exe' },
+  { label: 'macOS', file: 'bgit-desktop-darwin-universal.dmg' },
+  { label: 'Linux (.deb)', file: 'bgit-desktop-linux-amd64.deb' },
+];
+
 const quickInstallTabs: InstallTab[] = [
   {
     id: 'linux',
@@ -407,6 +416,31 @@ export default function QuickInstallSection() {
               >
                 {tab.label}
               </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="quick-install-surface mb-8 flex flex-col gap-4 rounded-xl px-5 py-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+              Prefer an app?
+            </p>
+            <p className="mt-2 text-foreground/90">
+              The bgit desktop app does the same without a terminal. It shares
+              its settings with the CLI.{' '}
+              <a href="/docs/#desktop-app" className="text-accent hover:underline" style={{ color: "var(--accent)" }}>
+                Install guide
+              </a>
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {desktopDownloads.map(({ label, file }) => (
+              <a
+                key={file}
+                href={`${RELEASE_DOWNLOAD}/${file}`}
+                className="rounded-full border border-gray-700 bg-[var(--card-bg)] px-4 py-2 text-sm font-semibold text-foreground transition-all duration-200 hover:border-accent/60 hover:text-accent">
+                {label}
+              </a>
             ))}
           </div>
         </div>

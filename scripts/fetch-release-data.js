@@ -85,6 +85,13 @@ function buildLlms(version) {
 - Changelog: https://bgitcli.com/changelog/
 - Support: https://bgitcli.com/support/
 
+## Desktop App
+
+- Windows 10/11: https://github.com/byterings/bgit/releases/latest/download/bgit-desktop-windows-amd64-installer.exe
+- macOS 11+ (Intel and Apple Silicon): https://github.com/byterings/bgit/releases/latest/download/bgit-desktop-darwin-universal.dmg
+- Ubuntu 22.04+ / Debian 12+: https://github.com/byterings/bgit/releases/latest/download/bgit-desktop-linux-amd64.deb
+- Install guide: https://bgitcli.com/docs/#desktop-app
+
 ## Recommended Core Flow
 
 - \`bgit setup\`: One-time setup (config + managed safety hooks)
