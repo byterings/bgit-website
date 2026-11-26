@@ -62,10 +62,10 @@ export default function DocsPage() {
             mainEntity: [
               {
                 "@type": "Question",
-                name: "Does bgit wrap Git commands?",
+                name: "Does the bgit CLI replace Git?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. bgit only manages your Git and SSH configuration. You continue using regular git commands after switching identities.",
+                  text: "No. The CLI manages identity and SSH configuration, and you continue using regular git commands in the terminal. The bgit Desktop app also provides a visual repository workflow for changes, commits, branches, and sync.",
                 },
               },
               {
@@ -320,6 +320,19 @@ bgit-desktop`}</CodeBlock>
                       picked up as they are.
                     </p>
                   </div>
+
+                  <section id="desktop-workflow" className="scroll-mt-28 rounded-xl border border-sky-300/15 bg-sky-300/[.035] p-5 sm:p-6">
+                    <p className="text-xs font-semibold uppercase tracking-[.16em] text-accent">Desktop workflow</p>
+                    <h4 className="mt-2 text-xl font-semibold">Your first repository session</h4>
+                    <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-6 text-foreground/90">
+                      <li><strong>Add an identity.</strong> Enter its Git name and email, choose or create an SSH key, then add the public key to the matching GitHub account.</li>
+                      <li><strong>Add a repository.</strong> Clone from GitHub or open a repository already on your computer. Check the repository identity shown in its header.</li>
+                      <li><strong>Review and commit.</strong> Open Changes, select a file to inspect its diff, enter a commit summary, and commit the selected changes.</li>
+                      <li><strong>Sync with the remote.</strong> Fetch to check for updates, then pull or push. The app shows commits waiting to move in either direction.</li>
+                      <li><strong>Check health when needed.</strong> Use Doctor for setup and repository diagnostics; use Backup &amp; Restore in Settings to export or restore a protected <code>.bgit</code> archive.</li>
+                    </ol>
+                    <p className="mt-4 text-sm leading-6 text-muted">During a merge conflict, open conflicted files in your editor and resolve the conflict markers there. Save the files, return to bgit, and commit to finish the merge. For a visual tour, visit the <Link href="/desktop#preview" className="text-accent hover:underline">interactive Desktop preview</Link>.</p>
+                  </section>
                 </div>
 
                 {/* Command-line tool */}

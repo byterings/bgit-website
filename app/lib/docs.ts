@@ -33,6 +33,13 @@ export const docsSections: DocsSection[] = [
     ],
   },
   {
+    id: "desktop-workflow",
+    label: "Desktop workflow",
+    description:
+      "Get started in bgit Desktop: set up identities, repositories, commits, branches, and sync.",
+    keywords: ["desktop", "repository", "commit", "changes", "diff", "branch", "history", "pull", "push"],
+  },
+  {
     id: "getting-started",
     label: "Getting Started",
     description:
@@ -151,9 +158,9 @@ export const docsSections: DocsSection[] = [
 
 export const faqItems: FaqItem[] = [
   {
-    question: "Does bgit wrap Git commands?",
+    question: "Does the bgit CLI replace Git?",
     answer:
-      "No. bgit only manages your Git and SSH configuration. You continue using regular git commands after switching identities.",
+      "No. The CLI manages identity and SSH configuration, and you continue using regular git commands in the terminal. The bgit Desktop app also provides a visual repository workflow for changes, commits, branches, and sync.",
   },
   {
     question: "What's the difference between workspaces and bindings?",

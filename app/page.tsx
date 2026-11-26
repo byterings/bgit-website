@@ -14,7 +14,7 @@ export default function Home() {
           "@type": "SoftwareApplication",
           name: "bgit",
           description:
-            "A powerful CLI tool for managing multiple Git identities. Switch between work, personal, and client accounts with one command.",
+            "Manage multiple Git identities with bgit Desktop or CLI. Organize repositories, SSH keys, commits, and pushes across work and personal accounts.",
           applicationCategory: "DeveloperApplication",
           operatingSystem: "Linux, macOS, Windows",
           offers: {
@@ -39,20 +39,25 @@ export default function Home() {
           <div className="text-center lg:text-left">
             <h1 className="text-6xl md:text-7xl font-bold mb-6">bgit</h1>
             <p className="text-3xl text-muted mb-8">
-              Stop switching Git accounts manually.
+              Multiple Git accounts,
               <br />
-              Manage multiple identities with one command.
+              one workflow that stays clear.
             </p>
             <p className="text-xl text-foreground/90 mb-12 max-w-3xl mx-auto lg:mx-0 leading-relaxed">
-              Switch between work, personal, and client Git accounts instantly
-              — no config editing, no remote URL headaches.
+              Use the desktop app to manage repositories visually, or the CLI to
+              switch identities from your terminal. Both share the same setup.
             </p>
             <div className="flex flex-wrap justify-center lg:justify-start gap-4">
               <a
                 href="#quick-start"
                 className="inline-flex min-w-[168px] items-center justify-center rounded-xl border border-sky-200/70 bg-gradient-to-r from-cyan-200 via-sky-200 to-blue-300 px-8 py-4 text-lg font-semibold text-slate-950 shadow-[0_14px_34px_rgba(96,165,250,0.24)] transition-all duration-200 hover:-translate-y-0.5 hover:from-cyan-100 hover:via-sky-100 hover:to-blue-200 hover:shadow-[0_18px_40px_rgba(96,165,250,0.3)]">
-                Quick Start
+                Get bgit
               </a>
+              <Link
+                href="/desktop"
+                className="inline-flex min-w-[168px] items-center justify-center rounded-xl border border-sky-300/30 bg-sky-300/10 px-8 py-4 text-lg font-semibold text-sky-100 transition-all duration-200 hover:-translate-y-0.5 hover:bg-sky-300/15">
+                Explore Desktop
+              </Link>
               <a
                 href="#why-bgit"
                 className="inline-flex min-w-[168px] items-center justify-center rounded-xl border border-white/14 bg-gradient-to-r from-white/7 to-sky-300/8 px-8 py-4 text-lg font-semibold text-white shadow-[0_12px_28px_rgba(15,23,42,0.2)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-200/30 hover:from-white/10 hover:to-sky-300/12 hover:shadow-[0_16px_34px_rgba(59,130,246,0.14)]">
@@ -71,7 +76,7 @@ export default function Home() {
 
           <div className="mt-14 lg:mt-0">
             <p className="mb-4 text-center text-sm font-semibold uppercase tracking-[0.22em] text-accent lg:text-left">
-              Real workflow in seconds
+              CLI workflow · bgit use work
             </p>
             <HeroTerminalScene />
           </div>
@@ -188,7 +193,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold mb-4 text-center">Features</h2>
           <p className="text-center text-muted mb-12 text-lg">
-            Everything you need in a Git identity management CLI tool
+            Identity management across Desktop and CLI
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -329,7 +334,15 @@ export default function Home() {
                 Bind individual repos to specific identities for persistent ownership
               </p>
             </div>
+            <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
+              <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4 text-accent" aria-hidden="true">▤</div>
+              <h3 className="text-lg font-semibold mb-2">Desktop repository workflow</h3>
+              <p className="text-muted text-sm">Browse changes, review diffs, commit, and sync branches in the bgit app.</p>
+            </div>
           </div>
+          <p className="mt-8 text-center text-muted">
+            Want to see the visual workflow? <Link href="/desktop" className="font-semibold text-accent hover:underline">Explore bgit Desktop and try the interactive preview →</Link>
+          </p>
         </div>
       </section>
 
@@ -342,14 +355,19 @@ export default function Home() {
             Start using bgit in seconds
           </h2>
           <p className="text-xl text-muted mb-12 max-w-2xl mx-auto">
-            Join developers who use this CLI tool to manage multiple Git
-            accounts effortlessly
+            Keep work and personal repositories organized with bgit Desktop,
+            CLI, or both.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/docs"
               className="inline-flex min-w-[190px] items-center justify-center rounded-xl border border-sky-200/70 bg-gradient-to-r from-cyan-200 via-sky-200 to-blue-300 px-10 py-5 text-lg font-semibold text-slate-950 shadow-[0_14px_34px_rgba(96,165,250,0.24)] transition-all duration-200 hover:-translate-y-0.5 hover:from-cyan-100 hover:via-sky-100 hover:to-blue-200 hover:shadow-[0_18px_40px_rgba(96,165,250,0.3)]">
               Get Started Now
+            </Link>
+            <Link
+              href="/desktop"
+              className="inline-flex min-w-[190px] items-center justify-center rounded-xl border border-sky-300/30 bg-sky-300/10 px-10 py-5 text-lg font-semibold text-sky-100 transition-all duration-200 hover:-translate-y-0.5 hover:bg-sky-300/15">
+              Explore Desktop
             </Link>
             <Link
               href="/commands"

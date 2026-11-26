@@ -22,6 +22,7 @@ export default function Navigation() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/desktop', label: 'Desktop App' },
     { href: '/docs', label: 'Docs' },
     { href: '/commands', label: 'CLI Commands' },
     { href: '/changelog', label: 'Changelog' },

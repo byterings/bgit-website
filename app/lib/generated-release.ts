@@ -1,1 +1,1 @@
-export const bgitVersion = "0.6.0";
+export const bgitVersion = "0.12.4";

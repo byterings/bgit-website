@@ -1,6 +1,7 @@
 'use client';
 
 import { startTransition, useState } from 'react';
+import { siteConfig } from '../lib/config';
 
 interface TerminalBlock {
   label: string;
@@ -51,7 +52,7 @@ const quickInstallTabs: InstallTab[] = [
             path: 'dev@linux-box:~/projects',
             command:
               'curl -L https://github.com/byterings/bgit/releases/latest/download/bgit-linux-amd64 -o bgit\nchmod +x bgit\nsudo mv bgit /usr/local/bin/',
-            status: 'bgit version 0.6.0',
+            status: `bgit version ${siteConfig.version}`,
             detail:
               '% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n100 9630k  100 9630k    0     0  4619k      0  0:00:02  0:00:02 --:--:-- 8259k',
           },
@@ -120,7 +121,7 @@ const quickInstallTabs: InstallTab[] = [
             path: 'dev@macbook:~/projects',
             command:
               'curl -L https://github.com/byterings/bgit/releases/latest/download/bgit-darwin-arm64 -o bgit\nchmod +x bgit\nsudo mv bgit /usr/local/bin/\nbgit -v',
-            status: 'bgit version 0.6.0',
+            status: `bgit version ${siteConfig.version}`,
             detail:
               'For Intel Macs, use bgit-darwin-amd64 instead.\n\nbgit is now available globally.',
           },
@@ -189,7 +190,7 @@ const quickInstallTabs: InstallTab[] = [
             path: 'PS C:\\Users\\dev\\Projects>',
             command:
               'irm https://raw.githubusercontent.com/byterings/bgit/main/install.ps1 | iex\nbgit -v',
-            status: 'bgit version 0.6.0',
+            status: `bgit version ${siteConfig.version}`,
             detail:
               'The installer places bgit in your PATH so PowerShell can run it immediately.',
           },
@@ -426,11 +427,12 @@ export default function QuickInstallSection() {
               Prefer an app?
             </p>
             <p className="mt-2 text-foreground/90">
-              The bgit desktop app does the same without a terminal. It shares
-              its settings with the CLI.{' '}
-              <a href="/docs/#desktop-app" className="text-accent hover:underline" style={{ color: "var(--accent)" }}>
-                Install guide
-              </a>
+              Prefer a visual workflow? Desktop adds repository browsing,
+              changes, commits, and sync controls. It shares identities and
+              settings with the CLI.{' '}
+              <a href="/desktop" className="text-accent hover:underline" style={{ color: "var(--accent)" }}>Explore Desktop</a>
+              {' · '}
+              <a href="/docs/#desktop-app" className="text-accent hover:underline" style={{ color: "var(--accent)" }}>Install guide</a>
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

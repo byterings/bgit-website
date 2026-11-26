@@ -6,16 +6,16 @@ import { siteConfig } from "./lib/config";
 import { createPageMetadata, metadataBase } from "./lib/seo";
 
 const homeMetadata = createPageMetadata({
-  title: "bgit - CLI Tool for Multi-User Git Identity Management",
+  title: "bgit - Git identities, in your terminal or desktop",
   description:
-    "bgit is a powerful CLI tool for managing multiple Git identities. Switch between work, personal, and client accounts with one command. Automatic SSH key management, workspaces, and zero configuration mistakes.",
+    "Manage multiple Git identities with bgit Desktop or the CLI. Keep repository identity, SSH keys, commits, and pushes organized across work and personal accounts.",
   path: "/",
 });
 
 export const metadata: Metadata = {
   metadataBase,
   ...homeMetadata,
-  keywords: ["bgit", "git cli tool", "git identity manager", "multiple git accounts", "git multi-user", "ssh key management", "git account switcher", "developer tools", "command line tool"],
+  keywords: ["bgit", "git cli tool", "git desktop app", "git identity manager", "multiple git accounts", "git multi-user", "ssh key management", "git account switcher", "developer tools"],
   authors: [{ name: siteConfig.author }],
   creator: siteConfig.author,
   publisher: siteConfig.author,

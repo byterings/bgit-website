@@ -18,6 +18,9 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Product</h3>
             <div className="space-y-2 text-sm">
+              <Link href="/desktop" className="block text-muted hover:text-accent transition">
+                Desktop App
+              </Link>
               <Link href="/docs" className="block text-muted hover:text-accent transition">
                 Documentation
               </Link>
