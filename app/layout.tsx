@@ -28,10 +28,11 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/images/favicon.ico",
+    icon: "/images/favicon.png",
+    apple: "/images/favicon.png",
   },
   other: {
-    "theme-color": "#0a0a0a",
+    "theme-color": "#f3f4f8",
   },
 };
 
@@ -41,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="light" suppressHydrationWarning>
       <body className="antialiased">
         <Navigation />
         <main>{children}</main>

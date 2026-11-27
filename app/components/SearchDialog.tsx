@@ -39,7 +39,7 @@ const featuredResults: SearchEntry[] = [
   .filter(Boolean) as SearchEntry[];
 
 const categoryStyles: Record<SearchEntry['category'], string> = {
-  Page: 'bg-[#52a8ff]/10 text-[#52a8ff] border border-[#52a8ff]/20',
+  Page: 'bg-violet-400/10 text-violet-200 border border-violet-300/20',
   Docs: 'bg-green-500/10 text-green-400 border border-green-500/20',
   Command: 'bg-amber-500/10 text-amber-400 border border-amber-500/20',
   FAQ: 'bg-purple-500/10 text-purple-400 border border-purple-500/20',
@@ -149,7 +149,7 @@ export default function SearchDialog({ variant = 'desktop' }: SearchDialogProps)
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="rounded-md p-2 text-foreground transition-colors hover:bg-[#52a8ff]/10"
+        className="rounded-md p-2 text-slate-300 transition-colors hover:bg-violet-400/10"
         aria-label="Search the bgit website"
         title="Search"
       >
@@ -221,7 +221,7 @@ export default function SearchDialog({ variant = 'desktop' }: SearchDialogProps)
                       onClick={() => goToResult(result)}
                       className={`block w-full rounded-xl border px-4 py-3 text-left transition-colors ${
                         index === selectedIndex
-                          ? 'border-white/30 bg-[color:rgba(82,168,255,0.09)] shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_12px_32px_rgba(0,0,0,0.35)]'
+                          ? 'border-white/30 bg-[color:rgba(167,139,250,0.09)] shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_12px_32px_rgba(0,0,0,0.35)]'
                           : 'border-gray-800 bg-[var(--alt-bg)] hover:border-white/18 hover:bg-[var(--card-bg)]'
                       }`}
                     >

@@ -3,13 +3,14 @@
 import { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Check for saved theme preference or default to dark
-    const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' || 'dark';
+    // Keep a saved preference, and use light mode for first-time visitors.
+    const storedTheme = localStorage.getItem('theme');
+    const savedTheme = storedTheme === 'dark' ? 'dark' : 'light';
     setTheme(savedTheme);
     document.documentElement.classList.toggle('light', savedTheme === 'light');
   }, []);
@@ -29,7 +30,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg hover:bg-gray-800 transition-colors"
+      className="p-2 rounded-lg text-slate-300 hover:bg-white/[.08] transition-colors"
       aria-label="Toggle theme"
       title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >

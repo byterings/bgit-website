@@ -411,7 +411,7 @@ export default function QuickInstallSection() {
                 }}
                 className={`quick-install-tab rounded-full border px-5 py-2.5 text-sm font-semibold transition-all duration-200 ${
                   activeTab === tab.id
-                    ? 'border-accent bg-accent text-white shadow-[0_10px_30px_rgba(82,168,255,0.28)]'
+                    ? 'border-accent bg-accent text-white shadow-[0_10px_30px_rgba(124,58,237,0.28)]'
                     : 'border-gray-700 bg-[var(--card-bg)] text-muted hover:border-accent/50 hover:text-foreground'
                 }`}
               >

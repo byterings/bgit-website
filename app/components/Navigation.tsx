@@ -1,125 +1,130 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import ThemeToggle from './ThemeToggle';
-import SearchDialog from './SearchDialog';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import BrandLogo from "./BrandLogo";
+import ThemeToggle from "./ThemeToggle";
+import SearchDialog from "./SearchDialog";
+
+const navLinks = [
+  { href: "/desktop", label: "Desktop" },
+  { href: "/docs", label: "Docs" },
+  { href: "/commands", label: "CLI reference" },
+  { href: "/changelog", label: "Changelog" },
+];
 
 export default function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const normalizePath = (path: string) => {
-    if (path === '/') {
-      return '/';
-    }
-
-    return path.replace(/\/+$/, '');
-  };
-
-  const isActive = (path: string) => normalizePath(pathname) === normalizePath(path);
-
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/desktop', label: 'Desktop App' },
-    { href: '/docs', label: 'Docs' },
-    { href: '/commands', label: 'CLI Commands' },
-    { href: '/changelog', label: 'Changelog' },
-    { href: '/support', label: 'Help / Support' },
-  ];
+  const normalizePath = (path: string) =>
+    path === "/" ? "/" : path.replace(/\/+$/, "");
+  const isActive = (path: string) =>
+    normalizePath(pathname) === normalizePath(path);
 
   return (
-    <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b border-gray-800 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold hover:text-accent transition">
-          bgit
+    <nav className="fixed top-0 z-50 w-full border-b border-white/[.07] bg-[#090b10]/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-[68px] max-w-[1320px] items-center justify-between px-4 sm:px-7">
+        <Link href="/" className="group flex shrink-0 items-center" aria-label="bgit home">
+          <BrandLogo priority />
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-4 xl:gap-6">
-          <div className="flex gap-1 text-sm font-medium">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className={`px-3 py-1.5 rounded-md transition-all duration-200 ${
-                  isActive(href)
-                    ? 'text-[#52a8ff] bg-[#52a8ff]/15 font-semibold'
-                    : 'text-foreground hover:text-[#52a8ff] hover:bg-[#52a8ff]/10'
-                }`}
-              >
-                {label}
-              </Link>
-            ))}
-            <a
-              href="https://github.com/byterings/bgit"
-              className="px-3 py-1.5 rounded-md text-muted hover:text-[#52a8ff] hover:bg-[#52a8ff]/10 transition-all duration-200"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-          </div>
-          <div className="xl:hidden">
-            <SearchDialog variant="mobile" />
-          </div>
-          <div className="hidden xl:block">
-            <SearchDialog variant="desktop" />
-          </div>
-          <div className="border-l border-gray-800 pl-4 xl:pl-6">
-            <ThemeToggle />
-          </div>
+        <div className="hidden items-center gap-1 md:flex">
+          {navLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={`rounded-md px-3 py-2 text-[13px] transition ${isActive(href) ? "bg-white/[.07] text-white" : "text-slate-400 hover:bg-white/[.045] hover:text-slate-100"}`}>
+              {label}
+            </Link>
+          ))}
+          <a
+            href="https://github.com/byterings/bgit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md px-3 py-2 text-[13px] text-slate-400 transition hover:bg-white/[.045] hover:text-slate-100">
+            GitHub ↗
+          </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex md:hidden items-center gap-4">
+        <div className="hidden items-center gap-3 md:flex">
           <SearchDialog variant="mobile" />
+          <span className="h-5 w-px bg-white/10" />
+          <ThemeToggle />
+          <Link
+            href="/desktop#downloads"
+            className="ml-1 inline-flex h-9 items-center rounded-lg bg-violet-500 px-4 text-xs font-semibold text-white shadow-[0_5px_18px_rgba(124,58,237,.2)] transition hover:bg-violet-400">
+            Download
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-3 md:hidden">
           <ThemeToggle />
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-md text-foreground hover:bg-[#52a8ff]/10 transition-colors"
-            aria-label="Toggle menu"
-          >
+            type="button"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            className="rounded-md p-2 text-slate-200 hover:bg-white/[.07]"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}>
             {mobileMenuOpen ? (
-              <svg aria-hidden="true" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                aria-hidden="true"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.8}>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             ) : (
-              <svg aria-hidden="true" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                aria-hidden="true"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.8}>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-800 bg-background/95 backdrop-blur-sm">
-          <div className="px-4 py-4 space-y-2">
+        <div className="border-t border-white/[.07] bg-[#090b10]/95 px-4 pb-5 pt-3 backdrop-blur-xl md:hidden">
+          <SearchDialog variant="mobile" />
+          <div className="mt-3 space-y-1">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-2.5 rounded-md transition-all duration-200 ${
-                  isActive(href)
-                    ? 'text-[#52a8ff] bg-[#52a8ff]/15 font-semibold'
-                    : 'text-foreground hover:text-[#52a8ff] hover:bg-[#52a8ff]/10'
-                }`}
-              >
+                className={`block rounded-lg px-3 py-2.5 text-sm ${isActive(href) ? "bg-violet-400/10 text-violet-200" : "text-slate-300 hover:bg-white/[.05]"}`}>
                 {label}
               </Link>
             ))}
             <a
               href="https://github.com/byterings/bgit"
-              className="block px-4 py-2.5 rounded-md text-muted hover:text-[#52a8ff] hover:bg-[#52a8ff]/10 transition-all duration-200"
               target="_blank"
               rel="noopener noreferrer"
-            >
-              GitHub
+              className="block rounded-lg px-3 py-2.5 text-sm text-slate-300 hover:bg-white/[.05]">
+              GitHub ↗
             </a>
+            <Link
+              href="/desktop#downloads"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mt-2 flex h-11 items-center justify-center rounded-lg bg-violet-500 text-sm font-semibold text-white">
+              Download bgit Desktop
+            </Link>
           </div>
         </div>
       )}

@@ -2,60 +2,105 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '../components/JsonLd';
 import DesktopPreview from './DesktopPreview';
+import { siteConfig } from '../lib/config';
 import { createBreadcrumbJsonLd, createPageMetadata } from '../lib/seo';
 
 const release = 'https://github.com/byterings/bgit/releases/latest/download';
 const downloads = [
-  { os: 'Windows', detail: 'Windows 10 or 11 · 64-bit', file: 'bgit-desktop-windows-amd64-installer.exe' },
-  { os: 'macOS', detail: 'macOS 11+ · Intel and Apple Silicon', file: 'bgit-desktop-darwin-universal.dmg' },
-  { os: 'Linux', detail: 'Ubuntu 22.04+ / Debian 12+ · 64-bit', file: 'bgit-desktop-linux-amd64.deb' },
+  { os: 'Windows', requirement: 'Windows 10 or 11 · 64-bit', file: 'bgit-desktop-windows-amd64-installer.exe', action: 'Download for Windows' },
+  { os: 'macOS', requirement: 'macOS 11+ · Intel and Apple Silicon', file: 'bgit-desktop-darwin-universal.dmg', action: 'Download for macOS' },
+  { os: 'Linux', requirement: 'Ubuntu 22.04+ / Debian 12+ · 64-bit', file: 'bgit-desktop-linux-amd64.deb', action: 'Download for Linux' },
 ];
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'bgit Desktop - Manage Git identities and repositories visually',
-  description: 'Explore bgit Desktop: manage identities, inspect repositories, review changes, commit, and sync with the right Git account. Download for Windows, macOS, or Linux.',
+  title: 'bgit Desktop - Git identities, clear at a glance',
+  description: 'A desktop app for managing multiple Git identities and repository work. Review changes, commit, sync branches, and see which account applies before you push.',
   path: '/desktop/',
 });
 
+const highlights = [
+  ['See the identity first', 'The repository header shows which identity applies and whether it comes from a binding, workspace, remote, or default.'],
+  ['Work from one repository view', 'Review changed files and diffs, create commits, inspect history, manage branches, and sync with the remote.'],
+  ['Keep the setup healthy', 'Manage identities and SSH keys, run Doctor checks, and protect your setup with encrypted backups.'],
+];
+
 export default function DesktopPage() {
-  return <div className="min-h-screen px-5 pb-24 pt-28 sm:px-8">
-    <JsonLd data={createBreadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Desktop App', path: '/desktop/' }])}/>
-    <JsonLd data={{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'bgit Desktop', applicationCategory: 'DeveloperApplication', operatingSystem: 'Windows, macOS, Linux', isAccessibleForFree: true, description: 'A desktop Git identity and repository workflow app that shares configuration with the bgit CLI.', downloadUrl: 'https://github.com/byterings/bgit/releases/latest' }}/>
+  return (
+    <div className="product-shell overflow-hidden">
+      <JsonLd data={createBreadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Desktop App', path: '/desktop/' }])} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'bgit Desktop', applicationCategory: 'DeveloperApplication', operatingSystem: 'Windows, macOS, Linux', isAccessibleForFree: true, softwareVersion: siteConfig.version, description: 'A desktop Git identity and repository workflow app that shares configuration with the bgit CLI.', downloadUrl: 'https://github.com/byterings/bgit/releases/latest' }} />
 
-    <section className="mx-auto max-w-7xl">
-      <div className="grid items-center gap-12 xl:grid-cols-[.85fr_1.15fr]">
-        <div>
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[.2em] text-accent">bgit Desktop</p>
-          <h1 className="text-5xl font-bold leading-tight sm:text-6xl">Your Git identities.<br/><span className="text-accent">In one clear workspace.</span></h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-muted">Manage accounts, repositories, commits, and sync in a visual app. Prefer the terminal? The bgit CLI works with the same identities and settings.</p>
-          <div className="mt-8 flex flex-wrap gap-3"><a href="#downloads" className="rounded-xl bg-sky-300 px-6 py-3.5 font-semibold text-slate-950 transition hover:bg-sky-200">Download bgit Desktop</a><a href="#preview" className="rounded-xl border border-white/15 px-6 py-3.5 font-semibold transition hover:border-sky-300/50">Explore the preview</a></div>
-          <p className="mt-5 text-sm text-muted">Free and open source · Windows · macOS · Linux</p>
+      <section className="relative isolate px-5 pb-16 pt-32 sm:px-8 sm:pt-36">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute left-1/2 top-[-430px] h-[760px] w-[900px] -translate-x-1/2 rounded-full bg-violet-600/[.15] blur-[150px]" />
+          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-background" />
         </div>
-        <div id="preview"><DesktopPreview/><p className="mt-3 text-center text-xs text-muted">Interactive product preview with sample repository data. Select tabs to explore the workflow.</p></div>
-      </div>
-    </section>
+        <div className="mx-auto max-w-[1320px] text-center">
+          <p className="inline-flex items-center gap-2 rounded-full border border-violet-300/15 bg-violet-300/[.06] px-3.5 py-2 text-xs font-medium text-violet-100/90"><span className="h-1.5 w-1.5 rounded-full bg-violet-300"/>bgit Desktop <span className="text-violet-200/50">·</span> v{siteConfig.version}</p>
+          <h1 className="mx-auto mt-7 max-w-4xl text-[clamp(3rem,6vw,5.75rem)] font-semibold leading-[1.01] tracking-[-.065em] text-white">Many identities.<br/><span className="bg-gradient-to-r from-violet-200 via-violet-300 to-indigo-300 bg-clip-text text-transparent">No second guessing.</span></h1>
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">See your repositories, review changes, and know which Git identity applies before you commit or push. Your existing bgit CLI setup comes with you.</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="#downloads" className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-violet-500 px-5 text-sm font-semibold text-white shadow-[0_8px_28px_rgba(124,58,237,.25)] transition hover:-translate-y-0.5 hover:bg-violet-400">Download bgit Desktop <span aria-hidden="true">↓</span></a>
+            <a href="#preview" className="inline-flex min-h-12 items-center rounded-lg border border-white/15 bg-white/[.025] px-5 text-sm font-semibold text-slate-100 transition hover:border-white/30 hover:bg-white/[.06]">Explore the preview</a>
+          </div>
+          <div id="preview" className="mx-auto mt-14 max-w-[1180px] scroll-mt-28 text-left">
+            <div className="rounded-[20px] border border-white/[.12] bg-[#0b0f19]/90 p-1.5 shadow-[0_36px_110px_rgba(0,0,0,.6)] sm:p-2.5"><DesktopPreview /></div>
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 text-[11px] text-slate-500"><span>Interactive preview · Sample repositories and identities</span><span>Choose a section in the app bar to explore</span></div>
+          </div>
+        </div>
+      </section>
 
-    <section className="mx-auto mt-24 max-w-7xl">
-      <div className="mb-10 max-w-2xl"><p className="text-sm font-semibold uppercase tracking-[.18em] text-accent">A safer daily workflow</p><h2 className="mt-3 text-3xl font-bold sm:text-4xl">See what you’re working on—and who you’re working as.</h2></div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {[
-          ['Know the identity before you commit', 'See which name, email, and GitHub account apply to each repository—and whether they come from a binding, workspace, or default identity.'],
-          ['Review changes and commit', 'Browse changed files, inspect diffs, write a commit summary, and commit from the repository workspace.'],
-          ['Keep branches in sync', 'Inspect history and branches, fetch remote updates, then pull or push with the repository’s identity.'],
-          ['Manage multiple accounts', 'Create identities, set up SSH keys, copy public keys for GitHub, and test SSH connections.'],
-          ['Catch setup problems early', 'Run Doctor checks, review repository health, and fix supported configuration issues.'],
-          ['Back up and restore', 'Create or import password-protected .bgit backups from the app’s Backup & Restore settings.'],
-        ].map(([title, description]) => <article key={title} className="rounded-2xl border border-white/10 bg-white/[.025] p-6"><h3 className="text-lg font-semibold">{title}</h3><p className="mt-3 text-sm leading-6 text-muted">{description}</p></article>)}
-      </div>
-      <div className="mt-5 rounded-xl border border-amber-300/15 bg-amber-300/[.04] p-5 text-sm leading-6 text-muted"><strong className="text-foreground">When a merge conflict happens:</strong> bgit Desktop shows conflicted files and status. Resolve the conflict markers in your editor, save the files, then return to bgit and commit to finish the merge.</div>
-    </section>
+      <section id="downloads" className="scroll-mt-24 border-y border-white/[.07] bg-white/[.018] px-5 py-14 sm:px-8">
+        <div className="mx-auto max-w-[1160px]">
+          <div className="mb-7 flex flex-wrap items-end justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">Get started</p><h2 className="mt-2 text-2xl font-semibold tracking-[-.035em] text-white sm:text-3xl">Download for your computer.</h2></div><Link href="/docs/#desktop-app" className="text-sm text-slate-400 transition hover:text-violet-200">Read the install guide <span aria-hidden="true">→</span></Link></div>
+          <div className="grid gap-3 md:grid-cols-3">
+            {downloads.map(({ os, requirement, file, action }) => (
+              <a key={os} href={`${release}/${file}`} className="group flex min-h-[120px] flex-col justify-between rounded-xl border border-white/[.09] bg-[#0d111b] p-5 transition hover:-translate-y-0.5 hover:border-violet-300/30 hover:bg-[#101522]">
+                <div className="flex items-start justify-between gap-3"><div><p className="text-sm font-semibold text-white">{os}</p><p className="mt-1.5 text-xs text-slate-400">{requirement}</p></div><span aria-hidden="true" className="text-slate-500 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-violet-200">↗</span></div>
+                <span className="mt-5 text-xs font-medium text-violet-200">{action}</span>
+              </a>
+            ))}
+          </div>
+          <p className="mt-4 text-xs leading-5 text-slate-500">Requires Git on your computer. Linux package installs Git and its desktop dependencies. <Link href="/docs/#desktop-app" className="text-slate-300 underline decoration-white/20 underline-offset-4 hover:text-white">Installation steps and requirements</Link>.</p>
+        </div>
+      </section>
 
-    <section id="downloads" className="mx-auto mt-24 max-w-7xl scroll-mt-28">
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4"><div><p className="text-sm font-semibold uppercase tracking-[.18em] text-accent">Get the app</p><h2 className="mt-2 text-3xl font-bold">Download for your computer</h2></div><Link href="/docs/#desktop-app" className="text-sm font-semibold text-accent hover:underline">Full install and first-run guide →</Link></div>
-      <div className="grid gap-4 md:grid-cols-3">{downloads.map(({ os, detail, file }) => <a key={os} href={`${release}/${file}`} className="group rounded-2xl border border-white/10 bg-white/[.025] p-6 transition hover:-translate-y-1 hover:border-sky-300/40"><p className="text-xl font-semibold">{os}</p><p className="mt-2 text-sm text-muted">{detail}</p><span className="mt-6 inline-flex rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold transition group-hover:bg-sky-300 group-hover:text-slate-950">Download ↓</span></a>)}</div>
-      <p className="mt-5 text-sm leading-6 text-muted">Already use bgit CLI? Install the app and your existing identities and repositories are available there. Both apps use the same bgit setup. <Link href="/docs/#installation" className="text-accent hover:underline">See CLI installation options</Link>.</p>
-    </section>
+      <section className="px-5 py-24 sm:px-8 sm:py-32">
+        <div className="mx-auto max-w-[1160px]">
+          <div className="mb-12 max-w-2xl"><p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">Made for multi-account work</p><h2 className="mt-4 text-3xl font-semibold tracking-[-.045em] text-white sm:text-4xl">The details you need.<br/>Right where you need them.</h2></div>
+          <div className="grid gap-3 md:grid-cols-3">
+            {highlights.map(([title, description], index) => (
+              <article key={title} className="relative min-h-[230px] overflow-hidden rounded-2xl border border-white/[.09] bg-[#0d111b] p-6 sm:p-7">
+                <span className="font-mono text-[11px] text-violet-300/70">0{index + 1}</span>
+                <h3 className="mt-8 text-lg font-semibold tracking-[-.02em] text-white">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-400">{description}</p>
+                <div aria-hidden="true" className="absolute -bottom-16 -right-12 h-36 w-36 rounded-full bg-violet-500/[.07] blur-3xl" />
+              </article>
+            ))}
+          </div>
+          <div className="mt-5 rounded-xl border border-amber-300/15 bg-amber-300/[.035] p-5 text-sm leading-6 text-slate-400"><strong className="text-slate-200">Merge conflicts:</strong> bgit Desktop shows conflicted files and status. Resolve conflict markers in your editor, save the files, then return to bgit to commit and finish the merge.</div>
+        </div>
+      </section>
 
-    <section className="mx-auto mt-20 max-w-7xl rounded-2xl border border-white/10 bg-[#0d1118] p-7 sm:p-10"><div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center"><div><p className="text-sm font-semibold uppercase tracking-[.18em] text-accent">One setup, two ways to work</p><h2 className="mt-3 text-2xl font-bold">Use Desktop, CLI, or both.</h2><p className="mt-3 max-w-2xl leading-7 text-muted">The app and CLI share identities, SSH configuration, repository bindings, and workspaces. Install either one first; you can add the other later.</p></div><Link href="/docs" className="inline-flex justify-center rounded-xl border border-white/15 px-5 py-3 font-semibold hover:border-sky-300/50">Read the full docs</Link></div></section>
-  </div>;
+      <section className="border-y border-white/[.07] bg-[#0c1019] px-5 py-20 sm:px-8 sm:py-24">
+        <div className="mx-auto grid max-w-[1160px] gap-10 md:grid-cols-[.8fr_1.2fr] md:items-center">
+          <div><p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">Already use bgit?</p><h2 className="mt-4 text-3xl font-semibold tracking-[-.04em] text-white">Pick up where you left off.</h2><p className="mt-4 text-sm leading-6 text-slate-400">Desktop and CLI share identities, SSH configuration, repository bindings, and workspaces. Install the app and your existing bgit setup is ready to use.</p><Link href="/docs/#desktop-workflow" className="mt-6 inline-flex text-sm font-medium text-violet-200 hover:text-white">See the first-session guide <span className="ml-2">→</span></Link></div>
+          <div className="rounded-2xl border border-white/[.09] bg-[#0d111b] p-5 sm:p-7">
+            <div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-500/15 text-sm font-semibold text-violet-200">1</span><div><p className="text-sm font-semibold text-white">Install bgit Desktop</p><p className="mt-1 text-xs text-slate-500">Choose Windows, macOS, or Linux above</p></div></div>
+            <div className="ml-[17px] h-8 border-l border-dashed border-white/15" />
+            <div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-500/15 text-sm font-semibold text-violet-200">2</span><div><p className="text-sm font-semibold text-white">Open your repositories</p><p className="mt-1 text-xs text-slate-500">Your identities and bindings are shared</p></div></div>
+            <div className="ml-[17px] h-8 border-l border-dashed border-white/15" />
+            <div className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-500/15 text-sm font-semibold text-violet-200">3</span><div><p className="text-sm font-semibold text-white">Work visually or in the terminal</p><p className="mt-1 text-xs text-slate-500">Use whichever fits the task</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-24 sm:px-8 sm:py-28">
+        <div className="mx-auto flex max-w-[1160px] flex-col items-start justify-between gap-7 rounded-3xl border border-violet-300/15 bg-[radial-gradient(ellipse_at_60%_0%,rgba(124,58,237,.18),rgba(13,17,27,.94)_65%)] p-7 sm:flex-row sm:items-center sm:p-10">
+          <div><p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">Desktop + CLI</p><h2 className="mt-3 text-2xl font-semibold tracking-[-.04em] text-white sm:text-3xl">One setup. Pick your workflow.</h2><p className="mt-3 max-w-xl text-sm leading-6 text-slate-400">The app is optional. The CLI is optional. Your identities stay in sync.</p></div>
+          <Link href="/docs" className="inline-flex min-h-11 shrink-0 items-center rounded-lg border border-white/15 px-4 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[.04]">Read the full guide</Link>
+        </div>
+      </section>
+    </div>
+  );
 }

@@ -1,23 +1,22 @@
 import Link from 'next/link';
+import BrandLogo from './BrandLogo';
 import { siteConfig } from '../lib/config';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-16 px-6 border-t border-gray-800 bg-[#0d0d0d]">
-      <div className="max-w-7xl mx-auto">
+    <footer className="border-t border-white/[.07] bg-[#080a0f] px-6 py-16">
+      <div className="mx-auto max-w-[1320px]">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div>
-            <h3 className="font-bold text-lg mb-4">bgit</h3>
-            <p className="text-muted text-sm">
-              Multi-Git Identity Manager for developers managing multiple accounts.
-            </p>
+            <div className="mb-4"><BrandLogo /></div>
+            <p className="max-w-xs text-sm leading-6 text-slate-400">The right Git identity for every repository. Desktop and CLI share one setup.</p>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Product</h3>
-            <div className="space-y-2 text-sm">
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[.16em] text-slate-300">Product</h3>
+            <div className="space-y-2.5 text-sm">
               <Link href="/desktop" className="block text-muted hover:text-accent transition">
                 Desktop App
               </Link>
@@ -42,8 +41,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Resources</h3>
-            <div className="space-y-2 text-sm">
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[.16em] text-slate-300">Resources</h3>
+            <div className="space-y-2.5 text-sm">
               <a
                 href="https://github.com/byterings/bgit"
                 className="block text-muted hover:text-accent transition"
@@ -72,8 +71,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Connect</h3>
-            <div className="space-y-2 text-sm">
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[.16em] text-slate-300">Connect</h3>
+            <div className="space-y-2.5 text-sm">
               <a
                 href="mailto:bgit@byterings.com"
                 className="block text-muted hover:text-accent transition"
@@ -95,7 +94,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/[.07] pt-8 text-sm text-slate-500 md:flex-row">
           <p>
             © {currentYear} ByteRings. Released under the{' '}
             <a
