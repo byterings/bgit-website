@@ -25,7 +25,7 @@ const defaultOgImage = {
   url: siteConfig.ogImage,
   width: 1200,
   height: 630,
-  alt: "bgit - CLI Tool for Multi-User Git Identity Management",
+  alt: "bgit - Git identities for Desktop and CLI",
 } as const;
 
 const changelog = changelogData as ChangelogData;
@@ -35,6 +35,7 @@ export const metadataBase = new URL(siteConfig.url);
 export const publicSiteRoutes = [
   "/",
   "/docs/",
+  "/desktop/",
   "/commands/",
   "/changelog/",
   "/support/",

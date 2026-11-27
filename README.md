@@ -5,6 +5,7 @@ Documentation, product marketing, and release-history site for [bgit](https://gi
 ## What Lives Here
 
 - `/` product overview and install entry points
+- `/desktop/` Desktop product page, interactive preview, and downloads
 - `/docs/` guided documentation and FAQ
 - `/commands/` command reference
 - `/changelog/` release history sourced from changelog data
@@ -49,6 +50,7 @@ This works on Cloudflare Pages, Netlify, GitHub Pages, Vercel static output, or 
 Primary update surfaces:
 
 - Home page: `app/page.tsx`
+- Desktop page and interactive preview: `app/desktop/`
 - Docs page: `app/docs/page.tsx`
 - Commands page: `app/commands/page.tsx`
 - Changelog UI: `app/changelog/ChangelogContent.tsx`
@@ -66,7 +68,7 @@ Recommended update flow when `bgit` changes:
 2. Sync the website copy in `/docs` and `/commands`.
 3. Update `version.txt` and changelog data in `bgit`, or confirm the prebuild fetch will pull the latest release metadata.
 4. Run `npm run build`.
-5. Spot-check `/`, `/docs/`, `/commands/`, `/changelog/`, and `/support/`.
+5. Spot-check `/`, `/desktop/`, `/docs/`, `/commands/`, `/changelog/`, and `/support/`.
 
 ## SEO Notes
 

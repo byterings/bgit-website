@@ -27,6 +27,15 @@ const staticEntries: SearchEntry[] = [
     keywords: ["overview", "features", "home", "intro", "download"],
   },
   {
+    id: "page-desktop",
+    title: "bgit Desktop",
+    description:
+      "Explore the desktop app, interactive preview, platform downloads, and first-run guide.",
+    href: "/desktop",
+    category: "Page",
+    keywords: ["desktop", "app", "download", "preview", "windows", "macos", "linux"],
+  },
+  {
     id: "page-docs",
     title: "Documentation",
     description:

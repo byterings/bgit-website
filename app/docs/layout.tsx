@@ -5,7 +5,7 @@ import { createBreadcrumbJsonLd, createPageMetadata } from "../lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Documentation - bgit | Complete Guide to Multi-Git Identity Management",
   description:
-    "Complete documentation for bgit CLI tool. Learn installation, setup, workspaces, identity resolution, SSH key management, troubleshooting, and FAQ.",
+    "Complete documentation for bgit Desktop and CLI. Learn installation, repository workflows, identity setup, workspaces, SSH key management, troubleshooting, and FAQ.",
   path: "/docs/",
 });
 

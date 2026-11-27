@@ -5,6 +5,7 @@ export const dynamic = "force-static";
 
 const priorities: Record<(typeof publicSiteRoutes)[number], number> = {
   "/": 1,
+  "/desktop/": 0.9,
   "/docs/": 0.9,
   "/commands/": 0.8,
   "/changelog/": 0.6,
@@ -16,6 +17,7 @@ const changeFrequencies: Record<
   MetadataRoute.Sitemap[number]["changeFrequency"]
 > = {
   "/": "weekly",
+  "/desktop/": "weekly",
   "/docs/": "weekly",
   "/commands/": "weekly",
   "/changelog/": "monthly",

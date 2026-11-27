@@ -62,10 +62,10 @@ export default function DocsPage() {
             mainEntity: [
               {
                 "@type": "Question",
-                name: "Does bgit wrap Git commands?",
+                name: "Does the bgit CLI replace Git?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. bgit only manages your Git and SSH configuration. You continue using regular git commands after switching identities.",
+                  text: "No. The CLI manages identity and SSH configuration, and you continue using regular git commands in the terminal. The bgit Desktop app also provides a visual repository workflow for changes, commits, branches, and sync.",
                 },
               },
               {
@@ -129,7 +129,7 @@ export default function DocsPage() {
         }}
       />
       <div className="max-w-7xl mx-auto">
-        <div className="lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
+        <div className="lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-14 xl:gap-16">
           {/* Sidebar */}
           <aside className="hidden lg:block">
             <div className="sticky top-28">
@@ -163,13 +163,13 @@ export default function DocsPage() {
           </aside>
 
           {/* Main Content */}
-          <div className="min-w-0">
+          <div className="docs-main min-w-0">
             {/* Header */}
-            <div className="mb-12">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+            <div className="mb-14 max-w-3xl">
+              <h1 className="mb-4 text-4xl font-bold tracking-tight lg:text-5xl">
                 Documentation
               </h1>
-              <p className="text-xl text-muted">
+              <p className="text-lg leading-8 text-muted sm:text-xl">
                 Complete guide to the bgit desktop app and CLI for managing
                 multiple Git identities
               </p>
@@ -191,8 +191,8 @@ export default function DocsPage() {
             </div>
 
             {/* Installation */}
-            <section id="installation" className="mb-16 scroll-mt-28">
-              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+            <section id="installation" className="docs-section scroll-mt-28">
+              <h2 className="docs-section-title">
                 Installation
               </h2>
 
@@ -234,7 +234,7 @@ export default function DocsPage() {
                     ))}
                   </div>
 
-                  <div>
+                  <div className="docs-platform">
                     <h4 className="text-lg font-semibold mb-3 text-accent">Windows</h4>
                     <ol className="list-decimal space-y-2 pl-6 text-foreground/90">
                       <li>Download and open <code>bgit-desktop-windows-amd64-installer.exe</code>.</li>
@@ -259,7 +259,7 @@ export default function DocsPage() {
                     </p>
                   </div>
 
-                  <div>
+                  <div className="docs-platform">
                     <h4 className="text-lg font-semibold mb-3 text-accent">macOS</h4>
                     <ol className="list-decimal space-y-2 pl-6 text-foreground/90">
                       <li>Download and open <code>bgit-desktop-darwin-universal.dmg</code>.</li>
@@ -280,7 +280,7 @@ export default function DocsPage() {
                     </p>
                   </div>
 
-                  <div>
+                  <div className="docs-platform">
                     <h4 className="text-lg font-semibold mb-3 text-accent">Linux</h4>
                     <p className="text-muted mb-3 text-sm">
                       <strong>Ubuntu 22.04+, Debian 12+, Linux Mint 21+</strong> and other
@@ -320,6 +320,19 @@ bgit-desktop`}</CodeBlock>
                       picked up as they are.
                     </p>
                   </div>
+
+                  <section id="desktop-workflow" className="scroll-mt-28 rounded-xl border border-violet-300/15 bg-violet-300/[.035] p-5 sm:p-6">
+                    <p className="text-xs font-semibold uppercase tracking-[.16em] text-accent">Desktop workflow</p>
+                    <h4 className="mt-2 text-xl font-semibold">Your first repository session</h4>
+                    <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-6 text-foreground/90">
+                      <li><strong>Add an identity.</strong> Enter its Git name and email, choose or create an SSH key, then add the public key to the matching GitHub account.</li>
+                      <li><strong>Add a repository.</strong> Clone from GitHub or open a repository already on your computer. Check the repository identity shown in its header.</li>
+                      <li><strong>Review and commit.</strong> Open Changes, select a file to inspect its diff, enter a commit summary, and commit the selected changes.</li>
+                      <li><strong>Sync with the remote.</strong> Fetch to check for updates, then pull or push. The app shows commits waiting to move in either direction.</li>
+                      <li><strong>Check health when needed.</strong> Use Doctor for setup and repository diagnostics; use Backup &amp; Restore in Settings to export or restore a protected <code>.bgit</code> archive.</li>
+                    </ol>
+                    <p className="mt-4 text-sm leading-6 text-muted">During a merge conflict, open conflicted files in your editor and resolve the conflict markers there. Save the files, return to bgit, and commit to finish the merge. For a visual tour, visit the <Link href="/desktop#preview" className="text-accent hover:underline">interactive Desktop preview</Link>.</p>
+                  </section>
                 </div>
 
                 {/* Command-line tool */}
@@ -331,7 +344,7 @@ bgit-desktop`}</CodeBlock>
                 </div>
 
                 {/* Linux */}
-                <div>
+                <div className="docs-platform">
                   <h4 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
                     <svg
                       aria-hidden="true"
@@ -352,7 +365,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                 </div>
 
                 {/* macOS */}
-                <div>
+                <div className="docs-platform">
                   <h4 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
                     <svg
                       aria-hidden="true"
@@ -378,7 +391,7 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
                 </div>
 
                 {/* Windows */}
-                <div>
+                <div className="docs-platform">
                   <h4 className="text-xl font-semibold mb-4 text-accent flex items-center gap-3">
                     <svg
                       aria-hidden="true"
@@ -407,8 +420,8 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
             </section>
 
             {/* Getting Started */}
-            <section id="getting-started" className="mb-16 scroll-mt-28">
-              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+            <section id="getting-started" className="docs-section scroll-mt-28">
+              <h2 className="docs-section-title">
                 Getting Started
               </h2>
 
@@ -460,12 +473,12 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
             </section>
 
             {/* Usage Guide */}
-            <section id="usage" className="mb-16 scroll-mt-28">
-              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+            <section id="usage" className="docs-section scroll-mt-28">
+              <h2 className="docs-section-title">
                 Usage Guide
               </h2>
 
-              <div className="grid gap-4">
+              <div className="grid gap-4 sm:grid-cols-2">
                 {[
                   {
                     title: "Switching Identities",
@@ -568,8 +581,8 @@ sudo mv bgit /usr/local/bin/`}</CodeBlock>
             </section>
 
             {/* Workspaces */}
-            <section id="workspaces" className="mb-16 scroll-mt-28">
-              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+            <section id="workspaces" className="docs-section scroll-mt-28">
+              <h2 className="docs-section-title">
                 Workspaces
               </h2>
 
@@ -620,8 +633,8 @@ bgit bind --user work
             </section>
 
             {/* Identity Resolution */}
-            <section id="identity-resolution" className="mb-16 scroll-mt-28">
-              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+            <section id="identity-resolution" className="docs-section scroll-mt-28">
+              <h2 className="docs-section-title">
                 Identity Resolution
               </h2>
 
@@ -669,8 +682,8 @@ bgit bind --user work
             </section>
 
             {/* Configuration */}
-            <section id="configuration" className="mb-16 scroll-mt-28">
-              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+            <section id="configuration" className="docs-section scroll-mt-28">
+              <h2 className="docs-section-title">
                 Configuration
               </h2>
 
@@ -735,8 +748,8 @@ bgit bind --user work
               </div>
             </section>
 
-            <section id="backups" className="mb-16 scroll-mt-28">
-              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+            <section id="backups" className="docs-section scroll-mt-28">
+              <h2 className="docs-section-title">
                 Backups &amp; Restore
               </h2>
 
@@ -792,8 +805,8 @@ bgit status`}</CodeBlock>
             </section>
 
             {/* Troubleshooting */}
-            <section id="troubleshooting" className="mb-16 scroll-mt-28">
-              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+            <section id="troubleshooting" className="docs-section scroll-mt-28">
+              <h2 className="docs-section-title">
                 Troubleshooting
               </h2>
 
@@ -808,7 +821,7 @@ bgit status`}</CodeBlock>
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="grid gap-4 lg:grid-cols-2">
                 <div className="border border-gray-800 rounded-lg p-4 lg:p-5">
                   <h3 className="font-semibold mb-2">
                     SSH authentication fails
@@ -874,8 +887,8 @@ bgit status`}</CodeBlock>
             </section>
 
             {/* FAQ */}
-            <section id="faq" className="mb-16 scroll-mt-28">
-              <h2 className="text-3xl font-bold mb-6 pb-2 border-b border-gray-800">
+            <section id="faq" className="docs-section scroll-mt-28">
+              <h2 className="docs-section-title">
                 Frequently Asked Questions
               </h2>
 

@@ -1,14 +1,23 @@
-# bgit - CLI Tool for Multi-User Git Identity Management
+# bgit - Git identities for Desktop and CLI
 
-> bgit is a free, open-source command-line tool that manages multiple Git identities. It lets developers switch between work, personal, and client GitHub accounts while handling SSH and git config safely.
+> bgit is a free, open-source Git identity manager with a desktop app and CLI. Manage identities, SSH keys, repository bindings, commits, and Git remotes across work and personal accounts. Desktop and CLI share the same setup.
 
 ## Key Pages
 
 - Homepage: https://bgitcli.com/
+- Desktop app: https://bgitcli.com/desktop/
 - Documentation: https://bgitcli.com/docs/
 - Commands: https://bgitcli.com/commands/
 - Changelog: https://bgitcli.com/changelog/
 - Support: https://bgitcli.com/support/
+
+## Desktop App
+
+- Windows: https://github.com/byterings/bgit/releases/latest/download/bgit-desktop-windows-amd64-installer.exe
+- macOS: https://github.com/byterings/bgit/releases/latest/download/bgit-desktop-darwin-universal.dmg
+- Linux: https://github.com/byterings/bgit/releases/latest/download/bgit-desktop-linux-amd64.deb
+- Install guide: https://bgitcli.com/docs/#desktop-app
+- Interactive preview: https://bgitcli.com/desktop/#preview
 
 ## Recommended Core Flow
 
@@ -43,6 +52,6 @@
 - Written in Go
 - MIT License
 - Cross-platform: Linux, macOS, Windows
-- Current version on this site: 0.6.0
+- Current version on this site: 0.12.4
 - GitHub: https://github.com/byterings/bgit
 - Author: ByteRings (https://byterings.com)

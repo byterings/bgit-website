@@ -1,361 +1,180 @@
-import Link from "next/link";
-import HeroTerminalScene from "./components/HeroTerminalScene";
-import JsonLd from "./components/JsonLd";
-import QuickInstallSection from "./components/QuickInstallSection";
-import { siteConfig } from "./lib/config";
-import { absoluteUrl } from "./lib/seo";
+import Link from 'next/link';
+import DesktopPreview from './desktop/DesktopPreview';
+import JsonLd from './components/JsonLd';
+import QuickInstallSection from './components/QuickInstallSection';
+import { siteConfig } from './lib/config';
+import { absoluteUrl } from './lib/seo';
+
+const productFacts = [
+  { value: 'One setup', detail: 'Desktop and CLI share your bgit identities' },
+  { value: 'Per-repo', detail: 'See which identity applies before you commit' },
+  { value: 'Open source', detail: 'Free to use and inspect' },
+];
+
+const capabilities = [
+  {
+    number: '01',
+    title: 'Know who a repository belongs to.',
+    description:
+      'Give each repository its own identity, organize projects into workspaces, and keep a clear default for everything else.',
+    tags: ['Repository bindings', 'Workspace rules', 'Default identity'],
+  },
+  {
+    number: '02',
+    title: 'Review the work before it leaves.',
+    description:
+      'Browse changed files, inspect diffs, write a commit, then fetch, pull, or push from the repository workspace.',
+    tags: ['File-by-file changes', 'Diffs and history', 'Branch sync'],
+  },
+  {
+    number: '03',
+    title: 'Keep account setup in order.',
+    description:
+      'Manage SSH keys, run diagnostics, and create encrypted backups from the app or the command line.',
+    tags: ['SSH keys', 'Doctor checks', 'Encrypted backups'],
+  },
+];
 
 export default function Home() {
   return (
-    <div>
+    <div className="product-shell overflow-hidden">
       <JsonLd
         data={{
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          name: "bgit",
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'bgit',
           description:
-            "A powerful CLI tool for managing multiple Git identities. Switch between work, personal, and client accounts with one command.",
-          applicationCategory: "DeveloperApplication",
-          operatingSystem: "Linux, macOS, Windows",
-          offers: {
-            "@type": "Offer",
-            price: "0",
-            priceCurrency: "USD",
-          },
+            'Manage multiple Git identities with bgit Desktop or CLI. Organize repositories, SSH keys, commits, and pushes across work and personal accounts.',
+          applicationCategory: 'DeveloperApplication',
+          operatingSystem: 'Linux, macOS, Windows',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           url: siteConfig.url,
           downloadUrl: siteConfig.releases,
           softwareVersion: siteConfig.version,
-          author: {
-            "@type": "Organization",
-            name: siteConfig.author,
-            url: siteConfig.authorUrl,
-          },
+          author: { '@type': 'Organization', name: siteConfig.author, url: siteConfig.authorUrl },
           image: absoluteUrl(siteConfig.ogImage),
         }}
       />
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 lg:items-center">
-          <div className="text-center lg:text-left">
-            <h1 className="text-6xl md:text-7xl font-bold mb-6">bgit</h1>
-            <p className="text-3xl text-muted mb-8">
-              Stop switching Git accounts manually.
+
+      <section className="relative isolate px-5 pb-20 pt-32 sm:px-8 sm:pt-36 lg:pb-28">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[760px] overflow-hidden">
+          <div className="absolute left-[44%] top-[-360px] h-[720px] w-[720px] -translate-x-1/2 rounded-full bg-violet-600/[.12] blur-[150px]" />
+          <div className="absolute right-[-180px] top-[220px] h-[420px] w-[420px] rounded-full bg-indigo-500/[.07] blur-[130px]" />
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-background" />
+        </div>
+
+        <div className="mx-auto grid max-w-[1320px] items-center gap-12 xl:grid-cols-[.78fr_1.22fr] xl:gap-14">
+          <div className="max-w-[560px]">
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-violet-300/15 bg-violet-300/[.06] px-3.5 py-2 text-xs font-medium text-violet-100/90">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_10px_rgba(167,139,250,.8)]" />
+              Git identities, handled.
+            </div>
+            <h1 className="text-[clamp(3.4rem,6.4vw,6.1rem)] font-semibold leading-[.99] tracking-[-.065em] text-white">
+              Every repo.
               <br />
-              Manage multiple identities with one command.
+              <span className="bg-gradient-to-r from-violet-200 via-violet-300 to-indigo-300 bg-clip-text text-transparent">The right identity.</span>
+            </h1>
+            <p className="mt-7 max-w-[480px] text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
+              Keep work, personal, and client Git accounts in order. Use bgit Desktop to manage repositories visually, or the CLI from your terminal. They share the same setup.
             </p>
-            <p className="text-xl text-foreground/90 mb-12 max-w-3xl mx-auto lg:mx-0 leading-relaxed">
-              Switch between work, personal, and client Git accounts instantly
-              — no config editing, no remote URL headaches.
-            </p>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-              <a
-                href="#quick-start"
-                className="inline-flex min-w-[168px] items-center justify-center rounded-xl border border-sky-200/70 bg-gradient-to-r from-cyan-200 via-sky-200 to-blue-300 px-8 py-4 text-lg font-semibold text-slate-950 shadow-[0_14px_34px_rgba(96,165,250,0.24)] transition-all duration-200 hover:-translate-y-0.5 hover:from-cyan-100 hover:via-sky-100 hover:to-blue-200 hover:shadow-[0_18px_40px_rgba(96,165,250,0.3)]">
-                Quick Start
-              </a>
-              <a
-                href="#why-bgit"
-                className="inline-flex min-w-[168px] items-center justify-center rounded-xl border border-white/14 bg-gradient-to-r from-white/7 to-sky-300/8 px-8 py-4 text-lg font-semibold text-white shadow-[0_12px_28px_rgba(15,23,42,0.2)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-200/30 hover:from-white/10 hover:to-sky-300/12 hover:shadow-[0_16px_34px_rgba(59,130,246,0.14)]">
-                Why bgit
-              </a>
+
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <Link href="/desktop#downloads" className="group inline-flex min-h-12 items-center gap-2 rounded-lg bg-violet-500 px-5 text-sm font-semibold text-white shadow-[0_8px_28px_rgba(124,58,237,.25)] transition hover:-translate-y-0.5 hover:bg-violet-400">
+                Get bgit Desktop
+                <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">↗</span>
+              </Link>
+              <Link href="/docs/#cli" className="inline-flex min-h-12 items-center gap-2 rounded-lg border border-white/12 bg-white/[.035] px-5 text-sm font-semibold text-slate-100 transition hover:border-white/25 hover:bg-white/[.07]">
+                Install the CLI <span aria-hidden="true" className="text-slate-400">⌘</span>
+              </Link>
             </div>
-            <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm text-muted lg:justify-start">
-              <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
-                Built by developers, for developers
-              </div>
-              <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
-                Open source on GitHub
-              </div>
-            </div>
+            <p className="mt-5 text-xs text-slate-500">Free and open source <span className="mx-2 text-slate-700">/</span> Windows, macOS, Linux <span className="mx-2 text-slate-700">/</span> Uses your existing Git installation</p>
           </div>
 
-          <div className="mt-14 lg:mt-0">
-            <p className="mb-4 text-center text-sm font-semibold uppercase tracking-[0.22em] text-accent lg:text-left">
-              Real workflow in seconds
+          <div id="product-preview" className="relative scroll-mt-28">
+            <div className="absolute -inset-5 -z-10 rounded-[2rem] bg-gradient-to-br from-violet-500/[.13] via-indigo-500/[.05] to-transparent blur-2xl" />
+            <div className="rounded-[18px] border border-white/[.12] bg-[#0b0f19]/90 p-1.5 shadow-[0_32px_100px_rgba(0,0,0,.6)] sm:p-2.5">
+              <DesktopPreview />
+            </div>
+            <div className="mt-3 flex items-center justify-between px-1 text-[11px] text-slate-500">
+              <span>bgit Desktop · interactive preview</span>
+              <Link href="/desktop#preview" className="text-violet-300 transition hover:text-violet-200">Explore the app <span aria-hidden="true">→</span></Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Product principles" className="border-y border-white/[.07] bg-white/[.018] px-5 sm:px-8">
+        <div className="mx-auto grid max-w-[1320px] divide-y divide-white/[.07] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          {productFacts.map(({ value, detail }) => (
+            <div key={value} className="flex items-center gap-4 py-5 sm:px-6 sm:first:pl-0 sm:last:pr-0">
+              <span className="shrink-0 text-sm font-semibold text-violet-200">{value}</span>
+              <span className="text-xs leading-5 text-slate-400">{detail}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="px-5 py-24 sm:px-8 sm:py-32">
+        <div className="mx-auto max-w-[1160px]">
+          <div className="mb-12 grid gap-5 md:grid-cols-[.8fr_1.2fr] md:items-end">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">A clearer Git routine</p>
+              <h2 className="mt-4 max-w-md text-3xl font-semibold tracking-[-.04em] text-white sm:text-4xl">Identity should follow the repository.</h2>
+            </div>
+            <p className="max-w-xl text-sm leading-7 text-slate-400 md:justify-self-end">
+              Stop wondering which account is active. bgit explains whether a repository uses its binding, its workspace, its remote, or your default identity.
             </p>
-            <HeroTerminalScene />
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-white/[.09] bg-[#0d111b]">
+            {capabilities.map(({ number, title, description, tags }, index) => (
+              <article key={number} className={`grid gap-5 px-5 py-7 sm:px-8 sm:py-9 md:grid-cols-[72px_1fr_1fr] md:items-center ${index > 0 ? 'border-t border-white/[.08]' : ''}`}>
+                <span className="font-mono text-xs text-violet-300/80">{number}</span>
+                <div>
+                  <h3 className="max-w-sm text-xl font-medium leading-snug tracking-[-.025em] text-white sm:text-2xl">{title}</h3>
+                  <div className="mt-4 flex flex-wrap gap-2">{tags.map((tag) => <span key={tag} className="rounded-full border border-white/[.09] px-2.5 py-1 text-[10px] text-slate-400">{tag}</span>)}</div>
+                </div>
+                <p className="max-w-md text-sm leading-6 text-slate-400 md:justify-self-end">{description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative border-y border-white/[.07] bg-[#0c1019] px-5 py-20 sm:px-8 sm:py-24">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(124,58,237,.12),transparent_60%)]" />
+        <div className="relative mx-auto max-w-[1160px]">
+          <div className="mb-10 max-w-xl">
+            <p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">Choose your flow</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-.04em] text-white sm:text-4xl">One shared setup.<br/>Your way of working.</h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Link href="/desktop" className="group rounded-2xl border border-violet-300/20 bg-violet-300/[.045] p-6 transition hover:-translate-y-1 hover:border-violet-300/40 hover:bg-violet-300/[.07] sm:p-8">
+              <div className="flex items-center justify-between"><span className="rounded-md bg-violet-400/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-violet-200">Desktop app</span><span className="text-slate-500 transition group-hover:translate-x-1 group-hover:text-violet-200">↗</span></div>
+              <h3 className="mt-6 text-2xl font-semibold tracking-[-.03em] text-white">See the whole repo.</h3>
+              <p className="mt-3 max-w-md text-sm leading-6 text-slate-400">Review changed files and diffs, commit, manage branches, and sync—all with the repository’s identity in view.</p>
+              <span className="mt-7 inline-flex text-sm font-medium text-violet-200">Explore bgit Desktop <span className="ml-2">→</span></span>
+            </Link>
+            <Link href="/docs/#cli" className="group rounded-2xl border border-white/[.1] bg-white/[.025] p-6 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/[.04] sm:p-8">
+              <div className="flex items-center justify-between"><span className="rounded-md bg-white/[.08] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-slate-300">Command line</span><span className="text-slate-500 transition group-hover:translate-x-1 group-hover:text-white">↗</span></div>
+              <h3 className="mt-6 text-2xl font-semibold tracking-[-.03em] text-white">Keep your terminal flow.</h3>
+              <p className="mt-3 max-w-md text-sm leading-6 text-slate-400">Switch identities, bind repositories, organize workspaces, and diagnose setup with familiar commands.</p>
+              <span className="mt-7 inline-flex text-sm font-medium text-slate-200">Explore the CLI <span className="ml-2">→</span></span>
+            </Link>
           </div>
         </div>
       </section>
 
       <QuickInstallSection />
 
-      {/* Problem/Solution Section */}
-      <section id="why-bgit" className="py-20 px-6 bg-[#0d0d0d]">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center">Why bgit?</h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Problem Card */}
-            <div className="bg-[#0a0a0a] border border-red-900/40 rounded-xl p-8 shadow-[0_4px_24px_rgba(239,68,68,0.15)] hover:shadow-[0_8px_32px_rgba(239,68,68,0.25)] hover:border-red-800/60 transition-all duration-300 hover:-translate-y-1">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-red-500/15 border border-red-500/30 flex items-center justify-center">
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5 text-red-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2.5}>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-red-400">The Problem</h3>
-              </div>
-              <ul className="space-y-4 text-foreground/90">
-                <li className="flex gap-3">
-                  <span className="text-red-400 mt-0.5">-</span>
-                  <span>
-                    Constantly switching SSH configs
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-red-400 mt-0.5">-</span>
-                  <span>Pushing with wrong identity</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-red-400 mt-0.5">-</span>
-                  <span>Fixing remotes again and again</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-red-400 mt-0.5">-</span>
-                  <span>
-                    Never sure which account you&apos;re currently using
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Solution Card */}
-            <div className="bg-[#0a0a0a] border border-green-900/40 rounded-xl p-8 shadow-[0_4px_24px_rgba(34,197,94,0.15)] hover:shadow-[0_8px_32px_rgba(34,197,94,0.25)] hover:border-green-800/60 transition-all duration-300 hover:-translate-y-1">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center">
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5 text-green-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2.5}>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-green-400">
-                  The Solution
-                </h3>
-              </div>
-              <ul className="space-y-4 text-foreground/90">
-                <li className="flex gap-3">
-                  <span className="text-green-400 mt-0.5">+</span>
-                  <span>
-                    One command to switch: <code>bgit use work</code>
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-green-400 mt-0.5">+</span>
-                  <span>
-                    Workspaces for automatic identity by folder
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-green-400 mt-0.5">+</span>
-                  <span>
-                    Built-in diagnostics with <code>bgit doctor</code>
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-green-400 mt-0.5">+</span>
-                  <span>
-                    Keep using normal <code>git</code> commands
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Grid */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-4 text-center">Features</h2>
-          <p className="text-center text-muted mb-12 text-lg">
-            Everything you need in a Git identity management CLI tool
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Identity Switching */}
-            <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
-              <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-5 h-5 text-accent"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Switch accounts instantly</h3>
-              <p className="text-muted text-sm">
-                No config edits. No mistakes.
-              </p>
-            </div>
-
-            {/* Workspaces */}
-            <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
-              <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-5 h-5 text-accent"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Workspaces</h3>
-              <p className="text-muted text-sm">
-                Organize projects by identity. Repos in workspace folders automatically use the right account
-              </p>
-            </div>
-
-            {/* SSH Management */}
-            <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
-              <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-5 h-5 text-accent"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">SSH Management</h3>
-              <p className="text-muted text-sm">
-                Automatic SSH key generation and configuration for each identity
-              </p>
-            </div>
-
-            {/* Diagnostics */}
-            <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
-              <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-5 h-5 text-accent"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Diagnostics</h3>
-              <p className="text-muted text-sm">
-                Built-in doctor command to diagnose and auto-fix SSH permissions and config issues
-              </p>
-            </div>
-
-            {/* Cross-Platform */}
-            <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
-              <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-5 h-5 text-accent"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Cross-Platform</h3>
-              <p className="text-muted text-sm">
-                Works perfectly on Linux, macOS, and Windows
-              </p>
-            </div>
-
-            {/* Repo Binding */}
-            <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-6 shadow-[0_4px_20px_rgba(82,168,255,0.08)] hover:shadow-[0_8px_30px_rgba(82,168,255,0.18)] hover:border-accent/40 hover:-translate-y-1 transition-all duration-300">
-              <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-4">
-                <svg
-                  aria-hidden="true"
-                  className="w-5 h-5 text-accent"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Repo Binding</h3>
-              <p className="text-muted text-sm">
-                Bind individual repos to specific identities for persistent ownership
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 px-6 bg-[#0d0d0d]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Stop wasting time switching Git accounts
-            <br />
-            Start using bgit in seconds
-          </h2>
-          <p className="text-xl text-muted mb-12 max-w-2xl mx-auto">
-            Join developers who use this CLI tool to manage multiple Git
-            accounts effortlessly
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/docs"
-              className="inline-flex min-w-[190px] items-center justify-center rounded-xl border border-sky-200/70 bg-gradient-to-r from-cyan-200 via-sky-200 to-blue-300 px-10 py-5 text-lg font-semibold text-slate-950 shadow-[0_14px_34px_rgba(96,165,250,0.24)] transition-all duration-200 hover:-translate-y-0.5 hover:from-cyan-100 hover:via-sky-100 hover:to-blue-200 hover:shadow-[0_18px_40px_rgba(96,165,250,0.3)]">
-              Get Started Now
-            </Link>
-            <Link
-              href="/commands"
-              className="inline-flex min-w-[190px] items-center justify-center rounded-xl border border-white/14 bg-gradient-to-r from-white/7 to-sky-300/8 px-10 py-5 text-lg font-semibold text-white shadow-[0_12px_28px_rgba(15,23,42,0.2)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-200/30 hover:from-white/10 hover:to-sky-300/12 hover:shadow-[0_16px_34px_rgba(59,130,246,0.14)]">
-              View All Commands
-            </Link>
+      <section className="px-5 py-24 sm:px-8 sm:py-32">
+        <div className="mx-auto max-w-[1160px] rounded-3xl border border-violet-300/15 bg-[radial-gradient(ellipse_at_50%_0%,rgba(124,58,237,.18),rgba(13,17,27,.94)_65%)] px-6 py-12 text-center sm:px-12 sm:py-16">
+          <p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">Start with the app. Add the CLI anytime.</p>
+          <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-semibold tracking-[-.045em] text-white sm:text-5xl">Make the right Git identity the easy one.</h2>
+          <p className="mx-auto mt-5 max-w-xl text-sm leading-6 text-slate-400">Download bgit Desktop, or follow the guided install for the command-line tool.</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link href="/desktop#downloads" className="inline-flex min-h-12 items-center rounded-lg bg-violet-500 px-5 text-sm font-semibold text-white transition hover:bg-violet-400">Download Desktop</Link>
+            <Link href="/docs" className="inline-flex min-h-12 items-center rounded-lg border border-white/15 px-5 text-sm font-semibold text-slate-100 transition hover:border-white/30">Read the docs</Link>
           </div>
         </div>
       </section>

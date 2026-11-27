@@ -72,14 +72,58 @@ function writeChangelog(changelog) {
   fs.writeFileSync(CHANGELOG_OUTPUT_PATH, JSON.stringify(changelog, null, 2));
 }
 
-function buildLlms(version) {
-  return `# bgit - CLI Tool for Multi-User Git Identity Management
+function compareVersions(left, right) {
+  const a = left.split(".").map((part) => Number.parseInt(part, 10) || 0);
+  const b = right.split(".").map((part) => Number.parseInt(part, 10) || 0);
+  for (let index = 0; index < Math.max(a.length, b.length); index += 1) {
+    const difference = (a[index] || 0) - (b[index] || 0);
+    if (difference !== 0) return difference;
+  }
+  return 0;
+}
 
-> bgit is a free, open-source command-line tool that manages multiple Git identities. It lets developers switch between work, personal, and client GitHub accounts while handling SSH and git config safely.
+const knownReleaseNotes = {
+  "0.12.4": {
+    date: "2026-11-26",
+    phase: 10,
+    summary:
+      "Linux release binaries now explicitly target baseline x86-64 CPUs, improving compatibility with older AMD64 systems.",
+    features: [
+      {
+        title: "Baseline CPU compatibility for Linux releases",
+        description:
+          "The Linux CLI and Desktop build workflows set baseline x86-64 compiler flags, including the desktop link step, so release binaries are less dependent on newer build-machine CPU features.",
+      },
+    ],
+    fixes: [],
+    breaking_changes: [],
+  },
+};
+
+function includeCurrentVersion(changelog, version) {
+  if (changelog.releases.some((release) => release.version === version)) return;
+  const latest = changelog.releases[0];
+  const knownNotes = knownReleaseNotes[version];
+  changelog.releases.unshift({
+    version,
+    date: knownNotes?.date || "",
+    phase: knownNotes?.phase || latest?.phase || 10,
+    summary: knownNotes?.summary || `bgit v${version} is the current release. See GitHub Releases for release information.`,
+    features: knownNotes?.features || [],
+    fixes: knownNotes?.fixes || [],
+    breaking_changes: knownNotes?.breaking_changes || [],
+  });
+}
+
+function buildLlms(version) {
+  return `# bgit - Git identities for Desktop and CLI
+
+> bgit is a free, open-source Git identity manager with a desktop app and CLI. Manage identities, SSH keys, repository bindings, commits, and Git remotes across work and personal accounts. Desktop and CLI share the same setup.
 
 ## Key Pages
 
 - Homepage: https://bgitcli.com/
+- Desktop app: https://bgitcli.com/desktop/
 - Documentation: https://bgitcli.com/docs/
 - Commands: https://bgitcli.com/commands/
 - Changelog: https://bgitcli.com/changelog/
@@ -91,6 +135,7 @@ function buildLlms(version) {
 - macOS 11+ (Intel and Apple Silicon): https://github.com/byterings/bgit/releases/latest/download/bgit-desktop-darwin-universal.dmg
 - Ubuntu 22.04+ / Debian 12+: https://github.com/byterings/bgit/releases/latest/download/bgit-desktop-linux-amd64.deb
 - Install guide: https://bgitcli.com/docs/#desktop-app
+- Interactive preview: https://bgitcli.com/desktop/#preview
 
 ## Recommended Core Flow
 
@@ -137,12 +182,17 @@ function writeLlms(version) {
 }
 
 async function main() {
-  let version = readGeneratedVersion() ?? "0.6.0";
+  let version = readGeneratedVersion() ?? "0.12.4";
 
   try {
     console.log("Fetching version.txt from bgit repo...");
     const versionText = await fetchText(VERSION_URL);
-    version = versionText.trim();
+    const fetchedVersion = versionText.trim();
+    if (compareVersions(fetchedVersion, version) >= 0) {
+      version = fetchedVersion;
+    } else {
+      console.log(`Remote version ${fetchedVersion} is behind local version ${version}; keeping the newer version.`);
+    }
     writeGeneratedVersion(version);
     console.log(`Version synced: ${version}`);
   } catch (error) {
@@ -155,6 +205,7 @@ async function main() {
     console.log("Fetching changelog from bgit repo...");
     const changelogText = await fetchText(CHANGELOG_URL);
     const changelog = JSON.parse(changelogText);
+    includeCurrentVersion(changelog, version);
     writeChangelog(changelog);
     console.log(`Changelog synced: ${changelog.releases.length} releases`);
   } catch (error) {
