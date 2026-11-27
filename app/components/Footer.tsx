@@ -37,6 +37,7 @@ export default function Footer() {
               <Link href="/changelog" className="block text-muted hover:text-accent transition">
                 Changelog
               </Link>
+              <Link href="/blog/" className="block text-muted hover:text-accent transition">Guides and Blog</Link>
             </div>
           </div>
 
@@ -51,6 +52,11 @@ export default function Footer() {
               >
                 GitHub
               </a>
+              <Link href="/blog/multiple-github-accounts-one-computer/" className="block text-muted hover:text-accent transition">Multiple GitHub accounts guide</Link>
+              <Link href="/blog/multiple-ssh-keys-for-git/" className="block text-muted hover:text-accent transition">Multiple SSH keys guide</Link>
+              <Link href="/blog/fix-wrong-git-author/" className="block text-muted hover:text-accent transition">Fix wrong Git author guide</Link>
+              <Link href="/blog/git-includeif-vs-bgit/" className="block text-muted hover:text-accent transition">Git includeIf vs bgit guide</Link>
+              <Link href="/blog/bgit-vs-manual-ssh-config/" className="block text-muted hover:text-accent transition">bgit vs manual SSH guide</Link>
               <a
                 href="https://github.com/byterings/bgit/issues"
                 className="block text-muted hover:text-accent transition"

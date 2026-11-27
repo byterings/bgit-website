@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import JsonLd from "../components/JsonLd";
-import { createBreadcrumbJsonLd, createPageMetadata } from "../lib/seo";
+import { createPageMetadata } from "../lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Documentation - bgit | Complete Guide to Multi-Git Identity Management",
+  title: "bgit Docs: Git Identity and SSH Setup",
   description:
-    "Complete documentation for bgit Desktop and CLI. Learn installation, repository workflows, identity setup, workspaces, SSH key management, troubleshooting, and FAQ.",
+    "Install and use bgit CLI and Desktop to manage multiple Git accounts, SSH keys, per-repository identity, workspaces, and common Git configuration issues.",
   path: "/docs/",
 });
 
@@ -15,14 +14,6 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <JsonLd
-        data={createBreadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Documentation", path: "/docs/" },
-        ])}
-      />
-      {children}
-    </>
+    <>{children}</>
   );
 }

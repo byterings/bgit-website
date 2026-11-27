@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import CodeBlock from "../components/CodeBlock";
 import Accordion from "../components/Accordion";
+import Breadcrumbs from "../components/Breadcrumbs";
+import JsonLd from "../components/JsonLd";
+import { createBreadcrumbJsonLd } from "../lib/seo";
 import { docsSections as sections, faqItems } from "../lib/docs";
 
 const RELEASE_DOWNLOAD = "https://github.com/byterings/bgit/releases/latest/download";
@@ -53,6 +56,8 @@ export default function DocsPage() {
 
   return (
     <div className="pt-24 pb-20 px-6">
+      <JsonLd data={createBreadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Documentation", path: "/docs/" }])} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "TechArticle", headline: "bgit documentation", description: "Complete guide to installing and using bgit Desktop and CLI for multiple Git identities, SSH keys, repositories, and workspaces.", url: "https://bgitcli.com/docs/", publisher: { "@type": "Organization", name: "ByteRings", url: "https://byterings.com" } }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -164,6 +169,7 @@ export default function DocsPage() {
 
           {/* Main Content */}
           <div className="docs-main min-w-0">
+            <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Documentation", href: "/docs/" }]} />
             {/* Header */}
             <div className="mb-14 max-w-3xl">
               <h1 className="mb-4 text-4xl font-bold tracking-tight lg:text-5xl">
@@ -174,6 +180,16 @@ export default function DocsPage() {
                 multiple Git identities
               </p>
             </div>
+
+            <section aria-labelledby="guide-library" className="mb-14 rounded-xl border border-white/10 bg-[#0d111b] p-5 sm:p-6">
+              <h2 id="guide-library" className="text-lg font-semibold">Browse focused bgit guides</h2>
+              <p className="mt-2 text-sm leading-6 text-muted">Jump to a focused guide while keeping the existing documentation sections and anchors below.</p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {[
+                  ["Install bgit CLI and Desktop", "/docs/install/"], ["Manage SSH keys", "/docs/ssh-keys/"], ["Workspaces and repository bindings", "/docs/workspaces/"], ["Use bgit Desktop", "/docs/desktop-app/"], ["Use the bgit CLI", "/docs/cli/"],
+                ].map(([label, href]) => <Link key={href} href={href} className="rounded-lg border border-white/10 px-4 py-3 text-sm font-medium text-slate-200 transition hover:border-violet-300/30 hover:text-white">{label} <span aria-hidden="true" className="text-violet-300">→</span></Link>)}
+              </div>
+            </section>
 
             {/* Mobile TOC */}
             <div className="lg:hidden bg-[#0d0d0d] border border-gray-800 rounded-lg p-4 mb-8">

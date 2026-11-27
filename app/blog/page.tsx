@@ -1,0 +1,12 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import Breadcrumbs from '../components/Breadcrumbs';
+import JsonLd from '../components/JsonLd';
+import { blogPosts } from '../lib/blog';
+import { createBreadcrumbJsonLd, createPageMetadata } from '../lib/seo';
+
+export const metadata: Metadata = createPageMetadata({ title: 'bgit Guides for Git Accounts and SSH', description: 'Practical guides to multiple Git accounts, SSH keys, identity errors, conditional Git config, and using bgit Desktop and CLI together.', path: '/blog/' });
+
+export default function BlogIndex() {
+  return <main className="product-shell min-h-[70vh] px-5 pb-20 pt-28 sm:px-8"><JsonLd data={createBreadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Guides', path: '/blog/' }])} /><Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/blog/' }]} /><header className="mx-auto max-w-5xl"><p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">Learn bgit</p><h1 className="mt-3 text-4xl font-semibold tracking-[-.045em] text-white sm:text-5xl">Guides for multiple Git identities</h1><p className="mt-5 max-w-3xl text-base leading-7 text-slate-300">Practical walkthroughs for managing accounts, SSH keys, author settings, and repository identity rules with Git and bgit.</p></header><div className="mx-auto mt-10 grid max-w-5xl gap-4 md:grid-cols-2">{blogPosts.map(post => <article key={post.slug} className="rounded-2xl border border-white/10 bg-[#0d111b] p-6"><h2 className="text-xl font-semibold leading-snug text-white"><Link href={`/blog/${post.slug}/`} className="hover:text-violet-200">{post.title}</Link></h2><p className="mt-3 text-sm leading-6 text-slate-400">{post.description}</p><Link href={`/blog/${post.slug}/`} className="mt-5 inline-flex text-sm font-medium text-violet-200 hover:text-white">Read the guide <span className="ml-2" aria-hidden="true">→</span></Link></article>)}</div><section className="mx-auto mt-10 max-w-5xl border-t border-white/10 pt-6"><h2 className="text-lg font-semibold text-white">More bgit resources</h2><div className="mt-3 flex flex-wrap gap-5 text-sm"><Link href="/docs/" className="text-violet-200 hover:text-white">Browse all documentation</Link><Link href="/commands/" className="text-violet-200 hover:text-white">See all CLI commands</Link><Link href="/desktop/" className="text-violet-200 hover:text-white">Download bgit Desktop</Link></div></section></main>;
+}
