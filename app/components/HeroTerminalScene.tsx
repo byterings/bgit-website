@@ -183,7 +183,7 @@ export default function HeroTerminalScene() {
   const [visibleLineCount, setVisibleLineCount] = useState(0);
   const [progress, setProgress] = useState(0);
   const [successPopped, setSuccessPopped] = useState(false);
-  const cycleStartedAt = useRef(Date.now());
+  const cycleStartedAt = useRef(0);
 
   useEffect(() => {
     let cancelled = false;

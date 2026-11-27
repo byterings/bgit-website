@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CodeBlock from "../components/CodeBlock";
 import { bgitCommands as commands } from "../lib/commands";
 
@@ -29,7 +29,7 @@ export default function CommandsPage() {
     (command) => !popularCommandIds.includes(command.id)
   );
 
-  const orderedCommands = [...popularCommands, ...remainingCommands];
+  const orderedCommands = useMemo(() => [...popularCommands, ...remainingCommands], [popularCommands, remainingCommands]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

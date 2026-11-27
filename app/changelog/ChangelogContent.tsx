@@ -43,7 +43,7 @@ const phaseNames: Record<number, string> = {
 };
 
 export default function ChangelogContent({ changelog }: ChangelogContentProps) {
-  const [activeVersion, setActiveVersion] = useState<string>("");
+  const [activeVersion, setActiveVersion] = useState<string>(changelog?.releases[0]?.version ?? "");
   const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
 
   // Calculate stats
@@ -58,8 +58,6 @@ export default function ChangelogContent({ changelog }: ChangelogContentProps) {
 
   useEffect(() => {
     if (!changelog || changelog.releases.length === 0) return;
-
-    setActiveVersion(changelog.releases[0].version);
 
     const observer = new IntersectionObserver(
       (entries) => {

@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "preview": "npm run build && cd out && python3 -m http.server 8000",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "private": true,
   "dependencies": {
@@ -23,6 +23,8 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.18"
+    "@tailwindcss/postcss": "^4.1.18",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.1.1"
   }
 }

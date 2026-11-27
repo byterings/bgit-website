@@ -1,6 +1,7 @@
 'use client';
 
 import { startTransition, useState } from 'react';
+import Link from 'next/link';
 import { siteConfig } from '../lib/config';
 
 interface TerminalBlock {
@@ -430,9 +431,9 @@ export default function QuickInstallSection() {
               Prefer a visual workflow? Desktop adds repository browsing,
               changes, commits, and sync controls. It shares identities and
               settings with the CLI.{' '}
-              <a href="/desktop" className="text-accent hover:underline" style={{ color: "var(--accent)" }}>Explore Desktop</a>
+              <Link href="/desktop/" className="text-accent hover:underline" style={{ color: "var(--accent)" }}>Explore Desktop</Link>
               {' · '}
-              <a href="/docs/#desktop-app" className="text-accent hover:underline" style={{ color: "var(--accent)" }}>Install guide</a>
+              <Link href="/docs/#desktop-app" className="text-accent hover:underline" style={{ color: "var(--accent)" }}>Install guide</Link>
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
