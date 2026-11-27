@@ -1,9 +1,19 @@
 import Link from 'next/link';
-import DesktopPreview from './desktop/DesktopPreview';
+import dynamic from 'next/dynamic';
 import JsonLd from './components/JsonLd';
 import QuickInstallSection from './components/QuickInstallSection';
-import { siteConfig } from './lib/config';
-import { absoluteUrl } from './lib/seo';
+import { createSoftwareApplicationJsonLd } from './lib/seo';
+
+const DesktopPreview = dynamic(() => import('./desktop/DesktopPreview'), { loading: () => <div aria-hidden="true" className="min-h-[400px] animate-pulse rounded-xl bg-white/[.03]" /> });
+
+const homeFaq = [
+  { question: 'What is bgit?', answer: 'bgit is a free, open source Git identity manager with a command-line interface and a desktop app. It helps organize identities, SSH keys, repository bindings, and workspaces.' },
+  { question: 'Is bgit free?', answer: 'Yes. bgit is free and open source under the MIT License.' },
+  { question: 'How do I use multiple GitHub accounts on one computer?', answer: 'Add each account as a bgit identity, then switch with bgit use or assign identities to repositories and workspaces. bgit helps manage the related Git and SSH configuration.' },
+  { question: 'Does bgit replace Git?', answer: 'No. The CLI works alongside your Git installation and you continue to use regular Git commands. bgit Desktop also offers a visual repository workflow.' },
+  { question: 'Do Desktop and CLI share the same setup?', answer: 'Yes. The desktop app and CLI use the same bgit identities, SSH configuration, repository bindings, and workspaces.' },
+  { question: 'How does bgit manage SSH keys?', answer: 'You can add an identity with a new or existing SSH key. bgit manages the associated SSH configuration and provides diagnostics through its doctor command.' },
+];
 
 const productFacts = [
   { value: 'One setup', detail: 'Desktop and CLI share your bgit identities' },
@@ -38,23 +48,8 @@ const capabilities = [
 export default function Home() {
   return (
     <div className="product-shell overflow-hidden">
-      <JsonLd
-        data={{
-          '@context': 'https://schema.org',
-          '@type': 'SoftwareApplication',
-          name: 'bgit',
-          description:
-            'Manage multiple Git identities with bgit Desktop or CLI. Organize repositories, SSH keys, commits, and pushes across work and personal accounts.',
-          applicationCategory: 'DeveloperApplication',
-          operatingSystem: 'Linux, macOS, Windows',
-          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-          url: siteConfig.url,
-          downloadUrl: siteConfig.releases,
-          softwareVersion: siteConfig.version,
-          author: { '@type': 'Organization', name: siteConfig.author, url: siteConfig.authorUrl },
-          image: absoluteUrl(siteConfig.ogImage),
-        }}
-      />
+      <JsonLd data={createSoftwareApplicationJsonLd('Manage multiple Git identities with bgit Desktop or CLI. Organize repositories, SSH keys, commits, and pushes across work and personal accounts.')} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) }} />
 
       <section className="relative isolate px-5 pb-20 pt-32 sm:px-8 sm:pt-36 lg:pb-28">
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[760px] overflow-hidden">
@@ -74,6 +69,7 @@ export default function Home() {
               <br />
               <span className="bg-gradient-to-r from-violet-200 via-violet-300 to-indigo-300 bg-clip-text text-transparent">The right identity.</span>
             </h1>
+            <p className="mt-4 text-sm font-medium text-violet-200 sm:text-base">Multiple Git accounts manager for the terminal and desktop.</p>
             <p className="mt-7 max-w-[480px] text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
               Keep work, personal, and client Git accounts in order. Use bgit Desktop to manage repositories visually, or the CLI from your terminal. They share the same setup.
             </p>
@@ -166,6 +162,27 @@ export default function Home() {
       </section>
 
       <QuickInstallSection />
+
+      <section aria-labelledby="why-bgit" className="border-y border-white/[.07] bg-[#0c1019] px-5 py-20 sm:px-8 sm:py-24">
+        <div className="mx-auto max-w-[1160px]">
+          <p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">Different projects, clear identity</p>
+          <h2 id="why-bgit" className="mt-3 text-3xl font-semibold tracking-[-.04em] text-white sm:text-4xl">Why bgit?</h2>
+          <div className="mt-9 grid gap-4 sm:grid-cols-2">
+            {[
+              ['Freelancers', 'Keep client and personal identities organized. Bind a repository to the right identity so your global default does not have to change for every project.'],
+              ['Agencies', 'Separate team and client repositories with workspaces and repository bindings. Check which identity applies before making a commit or push.'],
+              ['Work and personal accounts', 'Add both identities once, then switch from the CLI or let a repository binding select the identity for a project.'],
+              ['Open-source contributors', 'Use a dedicated identity for community work while keeping employer or personal repositories connected to their own Git identity.'],
+            ].map(([title, copy]) => <article key={title} className="rounded-xl border border-white/[.09] bg-[#0d111b] p-6"><h3 className="text-lg font-semibold text-white">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-400">{copy}</p></article>)}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="home-faq" className="px-5 py-20 sm:px-8 sm:py-24">
+        <div className="mx-auto max-w-[900px]"><p className="text-xs font-semibold uppercase tracking-[.2em] text-violet-300">Common questions</p><h2 id="home-faq" className="mt-3 text-3xl font-semibold tracking-[-.04em] text-white">bgit FAQ</h2>
+          <div className="mt-8 divide-y divide-white/10 border-y border-white/10">{homeFaq.map(({ question, answer }) => <details key={question} className="group py-5"><summary className="cursor-pointer list-none pr-8 text-base font-medium text-white marker:hidden">{question}<span aria-hidden="true" className="float-right text-violet-300 group-open:rotate-45">+</span></summary><p className="mt-3 max-w-3xl text-sm leading-6 text-slate-400">{answer}</p></details>)}</div>
+        </div>
+      </section>
 
       <section className="px-5 py-24 sm:px-8 sm:py-32">
         <div className="mx-auto max-w-[1160px] rounded-3xl border border-violet-300/15 bg-[radial-gradient(ellipse_at_50%_0%,rgba(124,58,237,.18),rgba(13,17,27,.94)_65%)] px-6 py-12 text-center sm:px-12 sm:py-16">

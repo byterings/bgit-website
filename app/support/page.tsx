@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import JsonLd from "../components/JsonLd";
+import Breadcrumbs from "../components/Breadcrumbs";
 import { createBreadcrumbJsonLd, createPageMetadata } from "../lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Support the Project - bgit | Contribute and Help Improve bgit",
+  title: "bgit Support and Contributions",
   description:
-    "Ways to support and contribute to bgit development. Report issues, contribute code, support financially, or spread the word.",
+    "Get help with bgit, report problems, and find ways to support the open source Git identity manager for CLI and Desktop users.",
   path: "/support/",
 });
 
@@ -19,6 +20,7 @@ export default function SupportPage() {
         ])}
       />
       <div className="max-w-7xl mx-auto">
+        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Support", href: "/support/" }]} />
         {/* Header */}
         <div className="mb-12 text-center">
           <h1 className="text-5xl font-bold mb-4">Support the Project</h1>

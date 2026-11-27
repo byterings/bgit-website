@@ -13,7 +13,8 @@ export default function BrandLogo({ priority = false }: { priority?: boolean }) 
       />
       <Image
         src="/images/logo-light.png"
-        alt="bgit"
+        alt=""
+        aria-hidden="true"
         width={144}
         height={48}
         priority={priority}

@@ -1,36 +1,42 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl, latestChangelogDate, publicSiteRoutes } from "./lib/seo";
+import { execFileSync } from "node:child_process";
+import { join } from "node:path";
+import { statSync } from "node:fs";
+import { absoluteUrl, publicSiteRoutes } from "./lib/seo";
 
 export const dynamic = "force-static";
 
-const priorities: Record<(typeof publicSiteRoutes)[number], number> = {
-  "/": 1,
-  "/desktop/": 0.9,
-  "/docs/": 0.9,
-  "/commands/": 0.8,
-  "/changelog/": 0.6,
-  "/support/": 0.5,
+const routeSource: Record<(typeof publicSiteRoutes)[number], string> = {
+  "/": "app/page.tsx",
+  "/desktop/": "app/desktop/page.tsx",
+  "/docs/": "app/docs/page.tsx",
+  "/commands/": "app/commands/page.tsx",
+  "/changelog/": "app/changelog/page.tsx",
+  "/support/": "app/support/page.tsx",
+  "/blog/": "app/blog/page.tsx",
+  "/blog/multiple-github-accounts-one-computer/": "app/lib/blog.ts",
+  "/blog/multiple-ssh-keys-for-git/": "app/lib/blog.ts",
+  "/blog/fix-wrong-git-author/": "app/lib/blog.ts",
+  "/blog/git-includeif-vs-bgit/": "app/lib/blog.ts",
+  "/blog/bgit-vs-manual-ssh-config/": "app/lib/blog.ts",
+  "/docs/install/": "app/docs/topic-data.ts",
+  "/docs/ssh-keys/": "app/docs/topic-data.ts",
+  "/docs/workspaces/": "app/docs/topic-data.ts",
+  "/docs/desktop-app/": "app/docs/topic-data.ts",
+  "/docs/cli/": "app/docs/topic-data.ts",
 };
 
-const changeFrequencies: Record<
-  (typeof publicSiteRoutes)[number],
-  MetadataRoute.Sitemap[number]["changeFrequency"]
-> = {
-  "/": "weekly",
-  "/desktop/": "weekly",
-  "/docs/": "weekly",
-  "/commands/": "weekly",
-  "/changelog/": "monthly",
-  "/support/": "monthly",
-};
+function lastModified(source: string): Date {
+  try {
+    const date = execFileSync("git", ["log", "-1", "--format=%cI", "--", source], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+    if (date) return new Date(date);
+  } catch { /* Use the source file timestamp when building without Git history. */ }
+  return statSync(join(process.cwd(), source)).mtime;
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date(latestChangelogDate);
-
   return publicSiteRoutes.map((path) => ({
     url: absoluteUrl(path),
-    lastModified,
-    changeFrequency: changeFrequencies[path],
-    priority: priorities[path],
+    lastModified: lastModified(routeSource[path]),
   }));
 }

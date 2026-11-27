@@ -23,6 +23,7 @@ type ChangelogData = {
 
 const defaultOgImage = {
   url: siteConfig.ogImage,
+  type: "image/png",
   width: 1200,
   height: 630,
   alt: "bgit - Git identities for Desktop and CLI",
@@ -39,6 +40,17 @@ export const publicSiteRoutes = [
   "/commands/",
   "/changelog/",
   "/support/",
+  "/blog/",
+  "/blog/multiple-github-accounts-one-computer/",
+  "/blog/multiple-ssh-keys-for-git/",
+  "/blog/fix-wrong-git-author/",
+  "/blog/git-includeif-vs-bgit/",
+  "/blog/bgit-vs-manual-ssh-config/",
+  "/docs/install/",
+  "/docs/ssh-keys/",
+  "/docs/workspaces/",
+  "/docs/desktop-app/",
+  "/docs/cli/",
 ] as const satisfies readonly SitePath[];
 
 export const latestChangelogDate = changelog.releases.reduce(
@@ -74,8 +86,43 @@ export function createPageMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [siteConfig.ogImage],
+      images: [{ url: siteConfig.ogImage, alt: defaultOgImage.alt }],
     },
+  };
+}
+
+export const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "ByteRings",
+  url: siteConfig.authorUrl,
+  logo: absoluteUrl("/images/logo.png"),
+  sameAs: [siteConfig.github],
+};
+
+export const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: `${siteConfig.url}/`,
+};
+
+export function createSoftwareApplicationJsonLd(description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "bgit",
+    description,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Windows, macOS, Linux",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    softwareVersion: siteConfig.version,
+    license: "https://opensource.org/license/mit/",
+    downloadUrl: siteConfig.releases,
+    url: `${siteConfig.url}/`,
+    image: absoluteUrl(siteConfig.ogImage),
+    author: { "@type": "Organization", name: "ByteRings", url: siteConfig.authorUrl },
+    publisher: { "@type": "Organization", name: "ByteRings", url: siteConfig.authorUrl },
   };
 }
 

@@ -9,5 +9,5 @@ export const siteConfig = {
   author: "ByteRings",
   authorUrl: "https://byterings.com",
   contactEmail: "bgit@byterings.com",
-  ogImage: "/images/og-image.svg",
+  ogImage: "/images/og-image.png",
 } as const;

@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import JsonLd from '../components/JsonLd';
-import DesktopPreview from './DesktopPreview';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { siteConfig } from '../lib/config';
 import { createBreadcrumbJsonLd, createPageMetadata } from '../lib/seo';
 
 const release = 'https://github.com/byterings/bgit/releases/latest/download';
+const DesktopPreview = dynamic(() => import('./DesktopPreview'), { loading: () => <div aria-hidden="true" className="min-h-[400px] animate-pulse rounded-xl bg-white/[.03]" /> });
 const downloads = [
   { os: 'Windows', requirement: 'Windows 10 or 11 · 64-bit', file: 'bgit-desktop-windows-amd64-installer.exe', action: 'Download for Windows' },
   { os: 'macOS', requirement: 'macOS 11+ · Intel and Apple Silicon', file: 'bgit-desktop-darwin-universal.dmg', action: 'Download for macOS' },
@@ -13,8 +15,8 @@ const downloads = [
 ];
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'bgit Desktop - Git identities, clear at a glance',
-  description: 'A desktop app for managing multiple Git identities and repository work. Review changes, commit, sync branches, and see which account applies before you push.',
+  title: 'bgit Desktop Git Identity Manager',
+  description: 'Manage multiple Git accounts in a desktop app. Review repositories, commits, SSH keys, and per-repository identities alongside your bgit CLI setup.',
   path: '/desktop/',
 });
 
@@ -28,7 +30,8 @@ export default function DesktopPage() {
   return (
     <div className="product-shell overflow-hidden">
       <JsonLd data={createBreadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Desktop App', path: '/desktop/' }])} />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'bgit Desktop', applicationCategory: 'DeveloperApplication', operatingSystem: 'Windows, macOS, Linux', isAccessibleForFree: true, softwareVersion: siteConfig.version, description: 'A desktop Git identity and repository workflow app that shares configuration with the bgit CLI.', downloadUrl: 'https://github.com/byterings/bgit/releases/latest' }} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'bgit', applicationCategory: 'DeveloperApplication', operatingSystem: 'Windows, macOS, Linux', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, softwareVersion: siteConfig.version, license: 'https://opensource.org/license/mit/', description: 'A desktop Git identity and repository workflow app that shares configuration with the bgit CLI.', url: 'https://bgitcli.com/desktop/', image: 'https://bgitcli.com/images/og-image.png', downloadUrl: 'https://github.com/byterings/bgit/releases/latest', author: { '@type': 'Organization', name: 'ByteRings', url: 'https://byterings.com' }, publisher: { '@type': 'Organization', name: 'ByteRings', url: 'https://byterings.com' } }} />
+      <div className="px-5 sm:px-8"><Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Desktop App', href: '/desktop/' }]} /></div>
 
       <section className="relative isolate px-5 pb-16 pt-32 sm:px-8 sm:pt-36">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
