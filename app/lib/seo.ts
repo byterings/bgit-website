@@ -34,8 +34,8 @@ export const metadataBase = new URL(siteConfig.url);
 
 export const publicSiteRoutes = [
   "/",
-  "/docs/",
   "/desktop/",
+  "/docs/",
   "/commands/",
   "/changelog/",
   "/support/",
@@ -43,7 +43,7 @@ export const publicSiteRoutes = [
 
 export const latestChangelogDate = changelog.releases.reduce(
   (latest, release) => (release.date > latest ? release.date : latest),
-  changelog.releases[0]?.date ?? "2026-03-04"
+  changelog.releases[0]?.date ?? "2026-03-04",
 );
 
 export function absoluteUrl(path: SitePath): string {
